@@ -1303,7 +1303,8 @@ const _fbApp = initializeApp({
   projectId: "hamara-app-ba3cd",
   storageBucket: "hamara-app-ba3cd.firebasestorage.app",
   messagingSenderId: "467223078844",
-  appId: "1:467223078844:web:a4b4857907f639f357edb9"
+  appId: "1:467223078844:web:a4b4857907f639f357edb9",
+  measurementId: "G-KPDFGKNZME"
 });
 const auth = getAuth(_fbApp);
 const db = getFirestore(_fbApp);
@@ -2489,6 +2490,88 @@ function openFeat(id){
   if(id==='s-sounds')renderSounds();
 }
 function closeFeat(id){var el=$(id);if(el)el.classList.remove('open');}
+
+/* ── GLOBAL EXPORTS (browser buttons ke liye) ── */
+window.goScreen = goScreen;
+window.demoLogin = demoLogin;
+window.sendOTP = sendOTP;
+window.verifyOTP = verifyOTP;
+window.otpNext = otpNext;
+window.switchTab = switchTab;
+window.openFeat = openFeat;
+window.closeFeat = closeFeat;
+window.showToast = showToast;
+window.openChat = openChat;
+window.closeChat = closeChat;
+window.startCall = startCall;
+window.endCall = endCall;
+window.toggleMsgSearch = toggleMsgSearch;
+window.doMsgSearch = doMsgSearch;
+window.closeMsgSearch = closeMsgSearch;
+window.openContactInfo = openContactInfo;
+window.toggleAttach = toggleAttach;
+window.closeAttach = closeAttach;
+window.sendTextMsg = sendTextMsg;
+window.startRecording = startRecording;
+window.stopRecording = stopRecording;
+window.sendMediaMsg = sendMediaMsg;
+window.sendDocMsg = sendDocMsg;
+window.sendLocationMsg = sendLocationMsg;
+window.openBroadcast = openBroadcast;
+window.toggleBc = toggleBc;
+window.sendBroadcast = sendBroadcast;
+window.setChatFilter = setChatFilter;
+window.addPollOpt = addPollOpt;
+window.sendPoll = sendPoll;
+window.votePoll = votePoll;
+window.setStudioTab = setStudioTab;
+window.likeVid = likeVid;
+window.followVid = followVid;
+window.openComments = openComments;
+window.closeComments = closeComments;
+window.addComment = addComment;
+window.openLiveStream = openLiveStream;
+window.addLiveComment = addLiveComment;
+window.sendGift = sendGift;
+window.setChaupalFilter = setChaupalFilter;
+window.doPost = doPost;
+window.likePost = likePost;
+window.toggleDarkLight = toggleDarkLight;
+window.setVQ = setVQ;
+window.setDisappear = setDisappear;
+window.selectWp = selectWp;
+window.applyWallpaper = applyWallpaper;
+window.setLanguage = setLanguage;
+window.refreshNearby = refreshNearby;
+window.playSound = playSound;
+window.addSound = addSound;
+window.applyFX = applyFX;
+window.setDuetMode = setDuetMode;
+window.openDiscover = openDiscover;
+window.lockPress = lockPress;
+window.lockDel = lockDel;
+window.unlockApp = unlockApp;
+window.pinNext = pinNext;
+window.saveTwoStep = saveTwoStep;
+window.addAutoReply = addAutoReply;
+window.openWithdraw = openWithdraw;
+window.selectPay = selectPay;
+window.doWithdraw = doWithdraw;
+window.openStory = openStory;
+window.nextStory = nextStory;
+window.closeStory = closeStory;
+window.sendStoryReply = sendStoryReply;
+window.addStory = addStory;
+window.closeAllMenus = closeAllMenus;
+window.addReaction = addReaction;
+window.replyToMsg = replyToMsg;
+window.starMsg = starMsg;
+window.editMsg = editMsg;
+window.copyMsg = copyMsg;
+window.forwardMsg = forwardMsg;
+window.deleteMsg = deleteMsg;
+window.cancelEdit = cancelEdit;
+window.clearReply = clearReply;
 
 /* ── START ── */
 window.addEventListener('load',function(){init();});
