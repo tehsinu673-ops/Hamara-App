@@ -1503,17 +1503,22 @@ function sendOTP(){
   var cc = $('cc-sel').value || '+92';
   var fullPhone = cc + phone.replace(/^0+/, '');
   $('phone-status').textContent = 'OTP bheja ja raha hai...';
-  if(!window._recapVerifier){
-    try{
-      window._recapVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        size: 'invisible',
-        callback: function(){},
-        'expired-callback': function(){ window._recapVerifier = null; }
-      });
-    }catch(e){
-      $('phone-status').textContent = 'Masla aya: ' + e.message;
-      return;
-    }
+  // Always clear old reCAPTCHA first
+  if(window._recapVerifier){
+    try{ window._recapVerifier.clear(); }catch(e){}
+    window._recapVerifier = null;
+  }
+  var container = document.getElementById('recaptcha-container');
+  if(container) container.innerHTML = '';
+  try{
+    window._recapVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      size: 'invisible',
+      callback: function(){},
+      'expired-callback': function(){ window._recapVerifier = null; }
+    });
+  }catch(e){
+    $('phone-status').textContent = 'Masla aya: ' + e.message;
+    return;
   }
   signInWithPhoneNumber(auth, fullPhone, window._recapVerifier)
     .then(function(confirmationResult){
