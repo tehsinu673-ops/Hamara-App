@@ -705,7 +705,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
     <div style="display:flex;align-items:flex-end;justify-content:space-between;padding:0 14px 12px;">
       <div class="av av-me profile-av-wrap" id="profile-av-big" style="width:86px;height:86px;font-size:32px;">AH</div>
       <div style="display:flex;gap:8px;padding-bottom:6px;">
-        <button onclick="openFeat('s-wallet')" style="padding:7px 16px;background:linear-gradient(135deg,var(--g9),#0a4832);border:1px solid var(--g7);border-radius:22px;color:var(--g4);font-size:12px;font-weight:700;cursor:pointer;font-family:Outfit,sans-serif;"><i class="fas fa-wallet"></i> Wallet</button>
+        <button onclick="openJazzCash()" style="padding:7px 16px;background:linear-gradient(135deg,var(--g9),#0a4832);border:1px solid var(--g7);border-radius:22px;color:var(--g4);font-size:12px;font-weight:700;cursor:pointer;font-family:Outfit,sans-serif;"><i class="fas fa-wallet"></i> Walletutton>
         <button onclick="showToast('Profile edit ✏️')" style="padding:7px 16px;background:transparent;border:1.5px solid var(--g5);border-radius:22px;color:var(--g4);font-size:12px;font-weight:700;cursor:pointer;font-family:Outfit,sans-serif;"><i class="fas fa-pen"></i> Edit</button>
       </div>
     </div>
@@ -772,8 +772,11 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
   <div class="bnav" id="main-bnav">
     <button class="bnav-btn active" id="nav-chats" onclick="switchTab('chats')"><i class="fas fa-comment-dots"></i><span>Chats</span><span class="bnav-badge" id="badge-chats" style="display:none;">0</span></button>
     <button class="bnav-btn" id="nav-studio" onclick="switchTab('studio')"><i class="fas fa-play-circle"></i><span>Studio</span></button>
-    <button class="bnav-btn" style="padding:4px 0;" onclick="openUploadModal()">
-      <div class="upload-center-btn"><i class="fas fa-plus" style="font-size:20px;color:#fff;"></i></div>
+    <!-- TikTok Style Center Camera Button -->
+    <button class="bnav-btn" style="padding:2px 0;margin-top:-6px;" onclick="openTikTokCamera()">
+      <div style="width:54px;height:36px;background:linear-gradient(135deg,#7c3aed,#059669);border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 4px 16px rgba(124,58,237,.5),0 4px 16px rgba(5,150,105,.5);">
+        <i class="fas fa-plus" style="font-size:20px;color:#fff;"></i>
+      </div>
     </button>
     <button class="bnav-btn" id="nav-chaupal" onclick="switchTab('chaupal')"><i class="fas fa-earth-americas"></i><span>Chaupal</span></button>
     <button class="bnav-btn" id="nav-profile" onclick="switchTab('profile')"><i class="fas fa-user-circle"></i><span>Profile</span></button>
@@ -1168,7 +1171,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 
 <!-- ══════════ WALLET ══════════ -->
 <div class="feat-panel" id="s-wallet">
-  <div class="topbar"><button class="iBtn" onclick="closeFeat('s-wallet')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">💰 Earning Wallet</span><button class="iBtn" onclick="openWithdraw()"><i class="fas fa-arrow-up-from-bracket"></i></button></div>
+  <div class="topbar"><button class="iBtn" onclick="closeFeat('s-wallet')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">💰 Earning Wallet</span><button onclick="openJazzCash()" style="padding:5px 10px;background:linear-gradient(135deg,#c62400,#ff4500);border:none;border-radius:8px;color:#fff;font-size:11px;font-weight:800;cursor:pointer;font-family:Outfit,sans-serif;display:flex;align-items:center;gap:4px;"><i class="fas fa-coins"></i> Buy</button><button class="iBtn" onclick="openWithdrawScreen()"><i class="fas fa-arrow-up-from-bracket"></i></button></div>
   <div style="flex:1;overflow-y:auto;">
     <div class="wallet-hero">
       <div class="wallet-sub">Total Balance</div>
@@ -2542,7 +2545,8 @@ function addAutoReply(){
 }
 
 /* ── WALLET ── */
-function openWithdraw(){closeFeat('s-wallet');setTimeout(function(){openFeat('s-withdraw');},300);}
+function openWithdraw(){ openWithdrawScreen(); return;
+  //OLD CODE:closeFeat('s-wallet');setTimeout(function(){openFeat('s-withdraw');},300);}
 function selectPay(m){
   APP.selectedPay=m;
   ['ep','jc','bk'].forEach(function(id){
@@ -7722,64 +7726,434 @@ document.addEventListener('DOMContentLoaded', function(){
   console.log('✅ Center LIVE Button (0 followers needed)');
   console.log('✅ TikTok Search Screen');
 });
+
+
+// ═══════════════════════════════════════════════════════════════
+// HAMARA v8.1 — TIKTOK CAMERA + JAZZCASH + LIVE FIX
+// ═══════════════════════════════════════════════════════════════
+
+// ── TIKTOK CAMERA ──
+var tcMode = 'photo';
+var tcRecording = false;
+var tcRecTimer = null;
+var tcRecSecs = 0;
+var tcFlashOn = false;
+var tcMicOn = false;
+
+function openTikTokCamera(){
+  var el = document.getElementById('tiktok-camera-screen');
+  if(el){ el.style.display = 'flex'; el.style.flexDirection = 'column'; }
+  tcMode = 'photo';
+  tcRecording = false;
+  resetCaptureBtn();
+  // Activate photo mode
+  document.querySelectorAll('.tc-mode-tab').forEach(function(t){ t.classList.remove('active'); });
+  var photoTab = document.getElementById('tcm-photo');
+  if(photoTab) photoTab.classList.add('active');
+}
+
+function closeTikTokCamera(){
+  var el = document.getElementById('tiktok-camera-screen');
+  if(el) el.style.display = 'none';
+  if(tcRecTimer){ clearInterval(tcRecTimer); tcRecTimer = null; }
+  tcRecording = false;
+  tcRecSecs = 0;
+}
+
+function setTCMode(mode){
+  tcMode = mode;
+  document.querySelectorAll('.tc-mode-tab').forEach(function(t){ t.classList.remove('active'); });
+  var tab = document.getElementById('tcm-'+mode);
+  if(tab) tab.classList.add('active');
+  
+  var liveOverlay = document.getElementById('tc-live-overlay');
+  var liveLabel = document.getElementById('tc-live-label');
+  var innerText = document.getElementById('tc-inner-text');
+  var innerCircle = document.getElementById('tc-inner-circle');
+  var outerRing = document.getElementById('tc-outer-ring');
+  
+  if(mode === 'live'){
+    if(liveOverlay) liveOverlay.style.display = 'block';
+    if(liveLabel) liveLabel.style.display = 'block';
+    if(innerText){ innerText.style.display = 'block'; }
+    if(innerCircle){ innerCircle.style.background = '#f43f5e'; }
+    if(outerRing){ outerRing.style.borderColor = '#f43f5e'; }
+    showToast('🔴 Live mode — button dabao to live jao!');
+  } else {
+    if(liveOverlay) liveOverlay.style.display = 'none';
+    if(liveLabel) liveLabel.style.display = 'none';
+    if(innerText){ innerText.style.display = 'none'; }
+    if(innerCircle){ innerCircle.style.background = '#fff'; }
+    if(outerRing){ outerRing.style.borderColor = '#fff'; }
+    if(mode === 'photo') showToast('📷 Photo mode');
+    else if(mode === '15s') showToast('🎥 15 second video');
+    else if(mode === '60s') showToast('🎥 60 second video');
+    else if(mode === '10m') showToast('🎥 10 minute video');
+    else if(mode === 'text') showToast('✍️ Text post mode');
+  }
+}
+
+function tcCapture(){
+  if(tcMode === 'live'){
+    // GO LIVE
+    closeTikTokCamera();
+    setTimeout(function(){ openHostLive(); }, 300);
+    return;
+  }
+  if(tcMode === 'photo'){
+    // Take photo
+    var btn = document.getElementById('tc-capture-btn');
+    btn.style.transform = 'scale(.88)';
+    setTimeout(function(){ btn.style.transform = 'scale(1)'; }, 150);
+    showToast('📸 Photo liya gaya!');
+    setTimeout(function(){ closeTikTokCamera(); }, 800);
+    return;
+  }
+  // Video modes (15s, 60s, 10m)
+  if(!tcRecording){
+    // Start recording
+    tcRecording = true;
+    tcRecSecs = 0;
+    var recBar = document.getElementById('tc-rec-bar');
+    if(recBar) recBar.style.display = 'flex';
+    var inner = document.getElementById('tc-inner-circle');
+    if(inner){ inner.style.borderRadius = '8px'; inner.style.width = '28px'; inner.style.height = '28px'; inner.style.background = '#f43f5e'; }
+    tcRecTimer = setInterval(function(){
+      tcRecSecs++;
+      var t = document.getElementById('tc-rec-time');
+      if(t){ var m = Math.floor(tcRecSecs/60); var s = tcRecSecs%60; t.textContent = m+':'+(s<10?'0':'')+s; }
+      var limit = tcMode==='15s'?15:(tcMode==='60s'?60:600);
+      if(tcRecSecs >= limit){ tcStopRecord(); }
+    }, 1000);
+    showToast('🔴 Recording shuru ho gayi!');
+  } else {
+    tcStopRecord();
+  }
+}
+
+function tcStopRecord(){
+  tcRecording = false;
+  if(tcRecTimer){ clearInterval(tcRecTimer); tcRecTimer = null; }
+  var recBar = document.getElementById('tc-rec-bar');
+  if(recBar) recBar.style.display = 'none';
+  resetCaptureBtn();
+  showToast('✅ Video record ho gayi! ' + tcRecSecs + ' seconds');
+  setTimeout(function(){ closeTikTokCamera(); }, 800);
+}
+
+function resetCaptureBtn(){
+  var inner = document.getElementById('tc-inner-circle');
+  if(inner){ inner.style.borderRadius = '50%'; inner.style.width = '64px'; inner.style.height = '64px'; inner.style.background = '#fff'; }
+}
+
+function setTCBottom(mode){
+  var post = document.getElementById('tcb-post');
+  var create = document.getElementById('tcb-create');
+  if(mode === 'post'){
+    post.style.color = '#fff'; post.style.borderBottomColor = '#fff';
+    create.style.color = 'rgba(255,255,255,.5)'; create.style.borderBottomColor = 'transparent';
+    showToast('📸 POST mode — Photo/Video share karein');
+  } else {
+    create.style.color = '#fff'; create.style.borderBottomColor = '#fff';
+    post.style.color = 'rgba(255,255,255,.5)'; post.style.borderBottomColor = 'transparent';
+    showToast('✨ CREATE mode — Naya content banao');
+  }
+}
+
+function toggleFlash(){
+  tcFlashOn = !tcFlashOn;
+  var icon = document.getElementById('tc-flash-icon');
+  if(icon) icon.style.color = tcFlashOn ? '#fbbf24' : '#fff';
+  showToast(tcFlashOn ? '⚡ Flash ON' : '⚡ Flash OFF');
+}
+
+function toggleMic(){
+  tcMicOn = !tcMicOn;
+  var icon = document.getElementById('tc-mic-icon');
+  if(icon){
+    icon.className = tcMicOn ? 'fas fa-microphone' : 'fas fa-microphone-slash';
+    icon.style.color = tcMicOn ? '#22c55e' : '#f43f5e';
+  }
+  showToast(tcMicOn ? '🎙️ Mic ON' : '🔇 Mic OFF');
+}
+
+// ── JAZZCASH COINS BUY ──
+var jcSelectedPkg = null;
+var jcPayMethod = 'jazzcash';
+var jcSelectedCoins = 0;
+var jcSelectedPkr = 0;
+
+function openJazzCash(){
+  var el = document.getElementById('jazzcash-screen');
+  if(el){ el.style.display = 'flex'; el.style.flexDirection = 'column'; }
+  updateJCDisplay();
+}
+function closeJazzCash(){
+  var el = document.getElementById('jazzcash-screen');
+  if(el) el.style.display = 'none';
+}
+function updateJCDisplay(){
+  var coins = APP.walletCoins || 42250;
+  var pkr = coins * 3;
+  var el1 = document.getElementById('jc-wallet-display');
+  var el2 = document.getElementById('jc-pkr-display');
+  var el3 = document.getElementById('jc-balance');
+  if(el1) el1.textContent = coins.toLocaleString();
+  if(el2) el2.textContent = pkr.toLocaleString();
+  if(el3) el3.textContent = coins.toLocaleString();
+}
+function selectPayMethod(method){
+  jcPayMethod = method;
+  var methods = ['jazzcash','easypaisa','card'];
+  methods.forEach(function(m){
+    var el = document.getElementById('pay-'+m);
+    if(el){
+      if(m === method){
+        el.style.background = m==='jazzcash'?'#c62400':(m==='easypaisa'?'#007e33':'#1a56db');
+        el.style.borderColor = el.style.background;
+      } else {
+        el.style.background = 'var(--bg3)';
+        el.style.borderColor = 'var(--bc)';
+      }
+    }
+  });
+  var lbl = document.getElementById('jc-method-label');
+  if(lbl) lbl.textContent = method==='jazzcash'?'JAZZCASH':(method==='easypaisa'?'EASYPAISA':'CARD');
+  showToast(method.toUpperCase() + ' select ho gaya ✅');
+}
+function selectJCPkg(coins, pkr, el){
+  jcSelectedCoins = coins;
+  jcSelectedPkr = pkr;
+  document.querySelectorAll('.jc-pkg').forEach(function(e){ e.classList.remove('selected'); });
+  el.classList.add('selected');
+  var btn = document.getElementById('jc-buy-btn');
+  if(btn) btn.textContent = '🛒 ' + coins + ' Coins — PKR ' + pkr.toLocaleString() + ' Khareedein';
+}
+function processJCPurchase(){
+  if(!jcSelectedCoins){ showToast('⚠️ Pehle package chunein!'); return; }
+  var phone = document.getElementById('jc-phone');
+  if(!phone || !phone.value.trim()){ showToast('⚠️ Phone number darj karein!'); return; }
+  showToast('⏳ Payment process ho rahi hai...');
+  setTimeout(function(){
+    APP.walletCoins = (APP.walletCoins||42250) + jcSelectedCoins;
+    updateJCDisplay();
+    showToast('✅ ' + jcSelectedCoins + ' Coins aap ke wallet mein add ho gaye! 🎉');
+    closeJazzCash();
+  }, 2000);
+}
+
+// ── WITHDRAW ──
+var wdMethod = 'jc';
+function openWithdrawScreen(){
+  var el = document.getElementById('withdraw-screen');
+  if(el){ el.style.display = 'flex'; el.style.flexDirection = 'column'; }
+  var coins = APP.walletCoins || 42250;
+  var coinsEl = document.getElementById('wd-coins');
+  var pkrEl = document.getElementById('wd-pkr');
+  if(coinsEl) coinsEl.textContent = coins.toLocaleString();
+  if(pkrEl) pkrEl.textContent = (coins*3).toLocaleString();
+}
+function closeWithdrawScreen(){
+  var el = document.getElementById('withdraw-screen');
+  if(el) el.style.display = 'none';
+}
+function calcWithdraw(){
+  var inp = document.getElementById('wd-amount');
+  var calc = document.getElementById('wd-calc');
+  var cShow = document.getElementById('wd-c-show');
+  var pkrShow = document.getElementById('wd-pkr-show');
+  var coins = parseInt(inp ? inp.value : 0) || 0;
+  if(coins > 0 && calc){
+    calc.style.display = 'block';
+    if(cShow) cShow.textContent = coins.toLocaleString();
+    if(pkrShow) pkrShow.textContent = 'PKR ' + (coins*3*0.95).toFixed(0) + ' (after 5% fee)';
+  } else if(calc){
+    calc.style.display = 'none';
+  }
+}
+function selectWdMethod(method){
+  wdMethod = method;
+  ['jc','ep','bank'].forEach(function(m){
+    var el = document.getElementById('wd-'+m);
+    if(el){
+      if(m === method){
+        el.style.background = m==='jc'?'#c62400':(m==='ep'?'#007e33':'#1e3a5f');
+        el.style.borderColor = el.style.background;
+      } else {
+        el.style.background = 'var(--bg3)';
+        el.style.borderColor = 'var(--bc)';
+      }
+    }
+  });
+}
+function processWithdrawal(){
+  var amt = document.getElementById('wd-amount');
+  var phone = document.getElementById('wd-phone');
+  var coins = parseInt(amt ? amt.value : 0) || 0;
+  if(coins < 1000){ showToast('⚠️ Minimum 1,000 Coins chahiye!'); return; }
+  if(!phone || !phone.value.trim()){ showToast('⚠️ Account number darj karein!'); return; }
+  if(coins > (APP.walletCoins||0)){ showToast('⚠️ Itne coins nahi hain!'); return; }
+  showToast('⏳ Withdraw request process ho rahi hai...');
+  setTimeout(function(){
+    APP.walletCoins = (APP.walletCoins||0) - coins;
+    showToast('✅ Withdraw request bhej di gayi! 24-48 ghante mein milega.');
+    closeWithdrawScreen();
+  }, 1500);
+}
+
+// ── FIX: Link Wallet/Coins buttons to JazzCash screen ──
+// Override the openFeat to handle wallet specially
+var _origOpenFeat = window.openFeat;
+window.openFeat = function(id){
+  if(id === 's-wallet'){ openJazzCash(); return; }
+  if(_origOpenFeat) _origOpenFeat(id);
+};
+
+// ── FIX: Live Discovery — Make live cards actually work ──
+// Patch renderLiveCards to work if liveCardsGrid exists
+document.addEventListener('DOMContentLoaded', function(){
+  // Fix live tab in studio
+  var stLive = document.getElementById('stab-live');
+  if(stLive) stLive.onclick = function(){ openHostLive(); };
+  
+  // Make sure wallet button opens JazzCash
+  setTimeout(function(){
+    var walletBtns = document.querySelectorAll('[onclick*="s-wallet"]');
+    walletBtns.forEach(function(btn){
+      btn.onclick = openJazzCash;
+    });
+    // Also fix withdraw button
+    var wdBtns = document.querySelectorAll('[onclick*="withdraw"], [onclick*="Withdraw"]');
+    wdBtns.forEach(function(btn){
+      btn.onclick = openWithdrawScreen;
+    });
+  }, 800);
+});
+
+// Add openJazzCash and openWithdrawScreen to settings/profile
+// Override old openWithdraw
+window.openWithdraw = function(){ openWithdrawScreen(); };
+
+// Make sure these are globally accessible
+window.openTikTokCamera = openTikTokCamera;
+window.closeTikTokCamera = closeTikTokCamera;
+window.openJazzCash = openJazzCash;
+window.closeJazzCash = closeJazzCash;
+window.openWithdrawScreen = openWithdrawScreen;
+window.closeWithdrawScreen = closeWithdrawScreen;
+
+console.log('🚀 Hamara v8.1 — TikTok Camera + JazzCash + Live Fixed!');
 </script>
 
 
-<!-- ══════════════ UPLOAD/LIVE MODAL (TikTok Style) ══════════════ -->
-<div class="upload-modal" id="upload-modal">
-  <div style="position:fixed;inset:0;" onclick="closeUploadModal()"></div>
-  <div class="upload-sheet">
-    <div style="width:40px;height:4px;background:var(--bc2);border-radius:4px;margin:0 auto 16px;"></div>
-    <div class="upload-sheet-title">📹 Video ya Live</div>
-    <div class="upload-options">
-      <div class="upload-opt" onclick="triggerVideoUpload()">
-        <div class="upload-opt-icon" style="background:#7c3aed20;">🎬</div>
-        <div class="upload-opt-lbl">Video Upload</div>
-        <div class="upload-opt-sub">Gallery se video select karein</div>
+<!-- ══════════════ TIKTOK CAMERA SCREEN (Full Screen) ══════════════ -->
+<div id="tiktok-camera-screen" style="position:fixed;inset:0;background:#000;display:none;flex-direction:column;max-width:480px;left:50%;transform:translateX(-50%);z-index:600;overflow:hidden;">
+  
+  <!-- Camera Preview Area (Full Screen) -->
+  <div id="tc-preview" style="flex:1;background:#111;position:relative;display:flex;align-items:center;justify-content:center;min-height:0;">
+    <!-- Fake camera preview -->
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a0a0a,#1a1a1a,#0a0a0a);"></div>
+    <div id="tc-cam-emoji" style="font-size:100px;opacity:.15;z-index:1;">📷</div>
+    
+    <!-- TOP BAR -->
+    <div style="position:absolute;top:0;left:0;right:0;padding:14px 14px 10px;display:flex;align-items:center;justify-content:space-between;z-index:10;background:linear-gradient(180deg,rgba(0,0,0,.7),transparent);">
+      <button onclick="closeTikTokCamera()" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;width:40px;height:40px;display:flex;align-items:center;justify-content:center;"><i class="fas fa-times"></i></button>
+      <div id="tc-sound-btn" onclick="showToast('🎵 Sound add karein!')" style="background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.3);border-radius:22px;padding:8px 16px;display:flex;align-items:center;gap:7px;cursor:pointer;">
+        <i class="fas fa-music" style="color:#fff;font-size:13px;"></i>
+        <span style="color:#fff;font-size:13px;font-weight:700;">Add sound</span>
       </div>
-      <div class="upload-opt" onclick="openInAppCamera()">
-        <div class="upload-opt-icon" style="background:#fb923c20;">📷</div>
-        <div class="upload-opt-lbl">Camera</div>
-        <div class="upload-opt-sub">Directly app mein record karein</div>
+      <div style="width:40px;"></div>
+    </div>
+    
+    <!-- RIGHT SIDE CONTROLS (like TikTok) -->
+    <div style="position:absolute;right:12px;top:80px;display:flex;flex-direction:column;gap:18px;z-index:10;align-items:center;">
+      <div onclick="showToast('Camera flip 🔄')" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);border:1.5px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;"><i class="fas fa-rotate" style="color:#fff;font-size:18px;"></i></div>
+      </div>
+      <div id="tc-flash-btn" onclick="toggleFlash()" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);border:1.5px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;"><i class="fas fa-bolt" style="color:#fff;font-size:18px;" id="tc-flash-icon"></i></div>
+      </div>
+      <div onclick="showToast('Timer ⏱️')" style="cursor:pointer;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);border:1.5px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;"><i class="fas fa-clock" style="color:#fff;font-size:18px;"></i></div>
+      </div>
+      <div onclick="showToast('Grid 📐')" style="cursor:pointer;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);border:1.5px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;"><i class="fas fa-border-all" style="color:#fff;font-size:16px;"></i></div>
+      </div>
+      <div id="tc-mic-btn" onclick="toggleMic()" style="cursor:pointer;">
+        <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);border:1.5px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;"><i class="fas fa-microphone-slash" style="color:#f43f5e;font-size:18px;" id="tc-mic-icon"></i></div>
       </div>
     </div>
-    <button class="upload-live-btn" onclick="goLiveNow()">
-      <i class="fas fa-circle" style="font-size:10px;animation:blink 1s infinite;"></i>
-      🔴 ABHI LIVE JAAEIN — TikTok Style
-    </button>
-    <div style="text-align:center;color:var(--d2);font-size:11px;margin:8px 0;"><span class="live-free-badge">0 FOLLOWERS CHAHIYE</span> — Koi bhi live ja sakta hai!</div>
-    <button class="upload-cancel-btn" onclick="closeUploadModal()">Iptal Karein</button>
+    
+    <!-- REC indicator (shown when recording) -->
+    <div id="tc-rec-bar" style="display:none;position:absolute;top:60px;left:0;right:0;align-items:center;justify-content:center;z-index:10;">
+      <div style="background:rgba(0,0,0,.7);border-radius:22px;padding:6px 16px;display:flex;align-items:center;gap:8px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;animation:blink 1s infinite;"></div>
+        <span style="color:#fff;font-size:13px;font-weight:700;">REC</span>
+        <span id="tc-rec-time" style="color:#fff;font-size:13px;">0:00</span>
+      </div>
+    </div>
+    
+    <!-- LIVE mode overlay -->
+    <div id="tc-live-overlay" style="display:none;position:absolute;inset:0;border:3px solid #f43f5e;border-radius:0;z-index:5;pointer-events:none;"></div>
+    <div id="tc-live-label" style="display:none;position:absolute;top:60px;left:14px;background:#f43f5e;border-radius:8px;padding:4px 12px;z-index:10;">
+      <span style="color:#fff;font-size:13px;font-weight:800;">🔴 LIVE READY</span>
+    </div>
+    
+    <!-- Gallery thumbnail (bottom left) -->
+    <div onclick="showToast('Gallery khul rahi hai 🖼️')" style="position:absolute;bottom:20px;left:14px;width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#7c3aed,#4c1d95);border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;z-index:10;">
+      <i class="fas fa-image" style="color:#fff;font-size:22px;"></i>
+    </div>
   </div>
-  <input type="file" id="video-upload-input" accept="video/*" style="display:none;" onchange="handleVideoUpload(this)">
+  
+  <!-- BOTTOM SECTION -->
+  <div style="background:#000;padding:0 0 8px;">
+    <!-- Duration mode tabs: 10m | 60s | 15s | PHOTO | TEXT | LIVE -->
+    <div style="display:flex;justify-content:center;gap:0;padding:12px 0 10px;border-bottom:1px solid rgba(255,255,255,.08);">
+      <div class="tc-mode-tab" id="tcm-10m" onclick="setTCMode('10m')">10m</div>
+      <div class="tc-mode-tab" id="tcm-60s" onclick="setTCMode('60s')">60s</div>
+      <div class="tc-mode-tab" id="tcm-15s" onclick="setTCMode('15s')">15s</div>
+      <div class="tc-mode-tab active" id="tcm-photo" onclick="setTCMode('photo')">PHOTO</div>
+      <div class="tc-mode-tab" id="tcm-text" onclick="setTCMode('text')">TEXT</div>
+      <div class="tc-mode-tab live" id="tcm-live" onclick="setTCMode('live')">🔴 LIVE</div>
+    </div>
+    
+    <!-- Capture Button Row -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 30px 12px;">
+      <!-- Left: effects -->
+      <div onclick="showToast('Effects ✨')" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+        <i class="fas fa-magic" style="color:#fff;font-size:18px;"></i>
+      </div>
+      
+      <!-- Center: Big capture / LIVE button -->
+      <div id="tc-capture-btn" onclick="tcCapture()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;">
+        <div id="tc-outer-ring" style="width:80px;height:80px;border-radius:50%;border:4px solid #fff;display:flex;align-items:center;justify-content:center;transition:all .2s;">
+          <div id="tc-inner-circle" style="width:64px;height:64px;border-radius:50%;background:#fff;transition:all .2s;display:flex;align-items:center;justify-content:center;">
+            <span id="tc-inner-text" style="display:none;color:#f43f5e;font-size:13px;font-weight:900;letter-spacing:.5px;">LIVE</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right: flip -->
+      <div onclick="showToast('Camera flip 🔄')" style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;cursor:pointer;">
+        <i class="fas fa-rotate" style="color:#fff;font-size:18px;"></i>
+      </div>
+    </div>
+    
+    <!-- Bottom Tabs: POST | CREATE -->
+    <div style="display:flex;justify-content:center;gap:32px;padding:4px 0 8px;">
+      <div onclick="setTCBottom('post')" id="tcb-post" style="color:#fff;font-size:14px;font-weight:800;cursor:pointer;padding:4px 12px;border-bottom:2px solid #fff;">POST</div>
+      <div onclick="setTCBottom('create')" id="tcb-create" style="color:rgba(255,255,255,.5);font-size:14px;font-weight:700;cursor:pointer;padding:4px 12px;border-bottom:2px solid transparent;">CREATE</div>
+    </div>
+  </div>
 </div>
 
-<!-- ══════════════ IN-APP CAMERA MODAL ══════════════ -->
-<div class="camera-modal" id="camera-modal">
-  <div style="position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;z-index:10;">
-    <button onclick="closeCameraModal()" style="background:rgba(0,0,0,.5);border:none;border-radius:50%;width:40px;height:40px;color:#fff;font-size:18px;cursor:pointer;"><i class="fas fa-times"></i></button>
-    <button onclick="showToast('Flash toggle 💡')" style="background:rgba(0,0,0,.5);border:none;border-radius:50%;width:40px;height:40px;color:#fff;font-size:18px;cursor:pointer;"><i class="fas fa-bolt"></i></button>
-  </div>
-  <div class="camera-preview">
-    <div style="font-size:100px;opacity:.4;">📷</div>
-    <div style="position:absolute;bottom:100px;left:0;right:0;text-align:center;color:rgba(255,255,255,.6);font-size:13px;">Camera loading...</div>
-    <!-- Recording indicator -->
-    <div id="rec-indicator" style="display:none;position:absolute;top:60px;left:50%;transform:translateX(-50%);background:#f43f5e;border-radius:20px;padding:5px 14px;display:flex;align-items:center;gap:6px;color:#fff;font-size:13px;font-weight:700;">
-      <div style="width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1s infinite;"></div> REC
-    </div>
-  </div>
-  <div class="camera-controls">
-    <button class="cam-btn" onclick="showToast('Flip camera 🔄')"><i class="fas fa-rotate"></i></button>
-    <div class="cam-capture" id="cam-capture-btn" onclick="captureOrRecord()" style="display:flex;align-items:center;justify-content:center;">
-      <div id="cam-inner" style="width:60px;height:60px;background:#fff;border-radius:50%;"></div>
-    </div>
-    <button class="cam-btn" onclick="showToast('Gallery 🖼️')"><i class="fas fa-images"></i></button>
-  </div>
-  <div style="position:absolute;bottom:140px;left:0;right:0;display:flex;justify-content:center;gap:16px;">
-    <button onclick="switchCamMode('photo')" id="cam-mode-photo" style="color:#fff;background:rgba(255,255,255,.2);border:2px solid #fff;border-radius:20px;padding:6px 16px;font-size:13px;font-weight:700;font-family:Outfit,sans-serif;cursor:pointer;">📷 Photo</button>
-    <button onclick="switchCamMode('video')" id="cam-mode-video" style="color:#fff;background:transparent;border:2px solid rgba(255,255,255,.4);border-radius:20px;padding:6px 16px;font-size:13px;font-weight:700;font-family:Outfit,sans-serif;cursor:pointer;">🎥 Video</button>
-    <button onclick="goLiveNow()" style="color:#f43f5e;background:rgba(244,63,94,.1);border:2px solid #f43f5e;border-radius:20px;padding:6px 16px;font-size:13px;font-weight:700;font-family:Outfit,sans-serif;cursor:pointer;">🔴 Live</button>
-  </div>
-</div>
+<!-- TikTok Camera CSS -->
+<style>
+.tc-mode-tab{color:rgba(255,255,255,.5);font-size:13px;font-weight:700;padding:5px 10px;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;}
+.tc-mode-tab.active{color:#fff;border-bottom-color:#fff;}
+.tc-mode-tab.live{color:#f43f5e;}
+.tc-mode-tab.live.active{color:#f43f5e;border-bottom-color:#f43f5e;}
+</style>
 
 <!-- ══════════════ TIKTOK SEARCH SCREEN ══════════════ -->
 <div class="tiktok-search" id="tiktok-search">
@@ -7800,5 +8174,179 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="search-body" id="search-body"></div>
 </div>
 
+
+<!-- ══════════════ JAZZCASH COINS BUY SCREEN ══════════════ -->
+<div id="jazzcash-screen" style="position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;max-width:480px;left:50%;transform:translateX(-50%);z-index:400;overflow-y:auto;">
+  <div class="topbar" style="flex-shrink:0;">
+    <button class="iBtn" onclick="closeJazzCash()"><i class="fas fa-arrow-left"></i></button>
+    <span class="topbar-title">💰 Coins Khareedein</span>
+    <div style="background:#059669;border-radius:8px;padding:4px 10px;display:flex;align-items:center;gap:5px;">
+      <i class="fas fa-coins" style="color:#fbbf24;font-size:12px;"></i>
+      <span id="jc-balance" style="color:#fff;font-size:12px;font-weight:800;">42,250</span>
+    </div>
+  </div>
+  
+  <div style="padding:16px 14px;">
+    <!-- Current Balance Card -->
+    <div style="background:linear-gradient(135deg,#064e3b,#059669);border-radius:16px;padding:20px;margin-bottom:16px;text-align:center;">
+      <div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:4px;">Aap ke paas</div>
+      <div style="color:#fbbf24;font-size:32px;font-weight:900;"><i class="fas fa-coins"></i> <span id="jc-wallet-display">42,250</span></div>
+      <div style="color:rgba(255,255,255,.6);font-size:11px;margin-top:4px;">= PKR <span id="jc-pkr-display">126,750</span> (1 Coin = 3 PKR)</div>
+    </div>
+    
+    <!-- Payment Methods -->
+    <div style="color:var(--d2);font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:10px;">PAYMENT METHOD CHUNEIN:</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <div id="pay-jazzcash" onclick="selectPayMethod('jazzcash')" style="flex:1;background:#c62400;border-radius:12px;padding:12px;text-align:center;cursor:pointer;border:2px solid #c62400;">
+        <div style="font-size:20px;margin-bottom:4px;">📱</div>
+        <div style="color:#fff;font-size:12px;font-weight:800;">JazzCash</div>
+      </div>
+      <div id="pay-easypaisa" onclick="selectPayMethod('easypaisa')" style="flex:1;background:var(--bg3);border-radius:12px;padding:12px;text-align:center;cursor:pointer;border:2px solid var(--bc);">
+        <div style="font-size:20px;margin-bottom:4px;">💚</div>
+        <div style="color:var(--t1);font-size:12px;font-weight:800;">Easypaisa</div>
+      </div>
+      <div id="pay-card" onclick="selectPayMethod('card')" style="flex:1;background:var(--bg3);border-radius:12px;padding:12px;text-align:center;cursor:pointer;border:2px solid var(--bc);">
+        <div style="font-size:20px;margin-bottom:4px;">💳</div>
+        <div style="color:var(--t1);font-size:12px;font-weight:800;">Card</div>
+      </div>
+    </div>
+    
+    <!-- Coin Packages -->
+    <div style="color:var(--d2);font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:10px;">COIN PACKAGE CHUNEIN:</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;" id="jc-packages">
+      <div class="jc-pkg" onclick="selectJCPkg(70,210,this)">
+        <div class="jc-pkg-icon">🪙</div>
+        <div class="jc-pkg-coins">70 Coins</div>
+        <div class="jc-pkg-pkr">PKR 210</div>
+      </div>
+      <div class="jc-pkg popular" onclick="selectJCPkg(350,1050,this)">
+        <div style="position:absolute;top:-8px;right:10px;background:#f59e0b;color:#000;font-size:9px;font-weight:900;padding:2px 8px;border-radius:10px;">POPULAR ⭐</div>
+        <div class="jc-pkg-icon">💰</div>
+        <div class="jc-pkg-coins">350 Coins</div>
+        <div class="jc-pkg-pkr">PKR 1,050</div>
+      </div>
+      <div class="jc-pkg" onclick="selectJCPkg(700,2100,this)">
+        <div class="jc-pkg-icon">💎</div>
+        <div class="jc-pkg-coins">700 Coins</div>
+        <div class="jc-pkg-pkr">PKR 2,100</div>
+      </div>
+      <div class="jc-pkg" onclick="selectJCPkg(1400,4200,this)">
+        <div class="jc-pkg-icon">👑</div>
+        <div class="jc-pkg-coins">1,400 Coins</div>
+        <div class="jc-pkg-pkr">PKR 4,200</div>
+      </div>
+      <div class="jc-pkg" onclick="selectJCPkg(3500,10500,this)">
+        <div class="jc-pkg-icon">🏆</div>
+        <div class="jc-pkg-coins">3,500 Coins</div>
+        <div class="jc-pkg-pkr">PKR 10,500</div>
+      </div>
+      <div class="jc-pkg" onclick="selectJCPkg(7000,21000,this)">
+        <div class="jc-pkg-icon">🌟</div>
+        <div class="jc-pkg-coins">7,000 Coins</div>
+        <div class="jc-pkg-pkr">PKR 21,000</div>
+      </div>
+    </div>
+    
+    <!-- JazzCash Number Input -->
+    <div id="jc-number-section" style="margin-bottom:12px;">
+      <div style="color:var(--d2);font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;"><span id="jc-method-label">JAZZCASH</span> NUMBER:</div>
+      <div style="background:var(--bg3);border:1.5px solid var(--bc);border-radius:12px;display:flex;align-items:center;gap:8px;padding:12px 14px;">
+        <span style="color:var(--d2);font-size:14px;">📱</span>
+        <input id="jc-phone" placeholder="03XX-XXXXXXX" style="background:transparent;border:none;color:var(--t1);font-size:15px;flex:1;outline:none;font-family:Outfit,sans-serif;" type="tel">
+      </div>
+    </div>
+    
+    <button id="jc-buy-btn" onclick="processJCPurchase()" style="width:100%;padding:15px;background:linear-gradient(135deg,#c62400,#ff4500);border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:Outfit,sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 24px rgba(198,36,0,.4);">
+      <i class="fas fa-shopping-cart"></i> Abhi Khareedein
+    </button>
+    
+    <div style="text-align:center;color:var(--d2);font-size:11px;margin-top:10px;">🔒 Secure payment — Hamara guaranteed</div>
+  </div>
+</div>
+
+<!-- ══════════════ WITHDRAW SCREEN ══════════════ -->
+<div id="withdraw-screen" style="position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;max-width:480px;left:50%;transform:translateX(-50%);z-index:400;overflow-y:auto;">
+  <div class="topbar" style="flex-shrink:0;">
+    <button class="iBtn" onclick="closeWithdrawScreen()"><i class="fas fa-arrow-left"></i></button>
+    <span class="topbar-title">💸 Withdraw Karein</span>
+  </div>
+  
+  <div style="padding:16px 14px;">
+    <!-- Balance Card -->
+    <div style="background:linear-gradient(135deg,#1e3a5f,#38bdf8);border-radius:16px;padding:20px;margin-bottom:20px;text-align:center;">
+      <div style="color:rgba(255,255,255,.7);font-size:12px;margin-bottom:4px;">Withdrawal ke liye coins</div>
+      <div style="color:#fbbf24;font-size:36px;font-weight:900;"><i class="fas fa-coins"></i> <span id="wd-coins">42,250</span></div>
+      <div style="color:rgba(255,255,255,.7);font-size:12px;margin-top:4px;">= PKR <span id="wd-pkr">126,750</span></div>
+      <div style="background:rgba(0,0,0,.2);border-radius:8px;padding:6px 12px;margin-top:10px;color:rgba(255,255,255,.8);font-size:11px;">
+        ⚠️ Minimum withdrawal: 1,000 Coins = PKR 3,000
+      </div>
+    </div>
+    
+    <!-- Withdraw Amount -->
+    <div style="color:var(--d2);font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">COINS DARJ KAREIN:</div>
+    <div style="background:var(--bg3);border:1.5px solid var(--bc);border-radius:12px;display:flex;align-items:center;gap:8px;padding:12px 14px;margin-bottom:16px;">
+      <i class="fas fa-coins" style="color:#fbbf24;font-size:18px;"></i>
+      <input id="wd-amount" placeholder="Coins ki miqdar (min 1,000)" type="number" min="1000" style="background:transparent;border:none;color:var(--t1);font-size:16px;flex:1;outline:none;font-family:Outfit,sans-serif;" oninput="calcWithdraw()">
+    </div>
+    <div id="wd-calc" style="background:var(--bg3);border-radius:10px;padding:10px 14px;margin-bottom:16px;display:none;">
+      <div style="display:flex;justify-content:space-between;color:var(--d1);font-size:13px;margin-bottom:4px;">
+        <span>Coins:</span><span id="wd-c-show" style="color:var(--t1);font-weight:700;">0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;color:var(--d1);font-size:13px;margin-bottom:4px;">
+        <span>Rate:</span><span style="color:var(--t1);font-weight:700;">1 Coin = PKR 3</span>
+      </div>
+      <div style="height:1px;background:var(--bc);margin:8px 0;"></div>
+      <div style="display:flex;justify-content:space-between;font-size:15px;">
+        <span style="color:var(--t1);font-weight:700;">Milega:</span><span id="wd-pkr-show" style="color:#22c55e;font-weight:900;">PKR 0</span>
+      </div>
+    </div>
+    
+    <!-- Payment Method -->
+    <div style="color:var(--d2);font-size:11px;font-weight:700;letter-spacing:1px;margin-bottom:8px;">PAYMENT METHOD:</div>
+    <div style="display:flex;gap:8px;margin-bottom:16px;">
+      <div id="wd-jc" onclick="selectWdMethod('jc')" style="flex:1;background:#c62400;border-radius:12px;padding:10px;text-align:center;cursor:pointer;border:2px solid #c62400;">
+        <div style="font-size:18px;margin-bottom:3px;">📱</div>
+        <div style="color:#fff;font-size:12px;font-weight:800;">JazzCash</div>
+      </div>
+      <div id="wd-ep" onclick="selectWdMethod('ep')" style="flex:1;background:var(--bg3);border-radius:12px;padding:10px;text-align:center;cursor:pointer;border:2px solid var(--bc);">
+        <div style="font-size:18px;margin-bottom:3px;">💚</div>
+        <div style="color:var(--t1);font-size:12px;font-weight:800;">Easypaisa</div>
+      </div>
+      <div id="wd-bank" onclick="selectWdMethod('bank')" style="flex:1;background:var(--bg3);border-radius:12px;padding:10px;text-align:center;cursor:pointer;border:2px solid var(--bc);">
+        <div style="font-size:18px;margin-bottom:3px;">🏦</div>
+        <div style="color:var(--t1);font-size:12px;font-weight:800;">Bank</div>
+      </div>
+    </div>
+    
+    <div style="background:var(--bg3);border:1.5px solid var(--bc);border-radius:12px;display:flex;align-items:center;gap:8px;padding:12px 14px;margin-bottom:16px;">
+      <span style="color:var(--d2);font-size:14px;">📱</span>
+      <input id="wd-phone" placeholder="Account number darj karein" style="background:transparent;border:none;color:var(--t1);font-size:15px;flex:1;outline:none;font-family:Outfit,sans-serif;" type="tel">
+    </div>
+    
+    <button onclick="processWithdrawal()" style="width:100%;padding:15px;background:linear-gradient(135deg,#065f46,#059669);border:none;border-radius:14px;color:#fff;font-size:16px;font-weight:800;cursor:pointer;font-family:Outfit,sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 6px 24px rgba(5,150,105,.4);">
+      <i class="fas fa-paper-plane"></i> Withdraw Request Bhejein
+    </button>
+    
+    <div style="background:var(--bg3);border-radius:12px;padding:14px;margin-top:16px;border:1px solid var(--bc);">
+      <div style="color:var(--t1);font-size:13px;font-weight:700;margin-bottom:8px;">ℹ️ Withdrawal Rules:</div>
+      <div style="color:var(--d1);font-size:12px;line-height:1.8;">
+        • Minimum: 1,000 Coins (PKR 3,000)<br>
+        • Processing: 24-48 ghante<br>
+        • Hamara fee: 5%<br>
+        • Live gifts se coins mile hon
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* JazzCash Package Cards */
+.jc-pkg{background:var(--bg3);border:2px solid var(--bc);border-radius:14px;padding:16px 12px;text-align:center;cursor:pointer;transition:all .15s;position:relative;}
+.jc-pkg:active,.jc-pkg.selected{border-color:var(--g5);background:rgba(16,185,129,.08);}
+.jc-pkg.popular{border-color:#f59e0b;background:rgba(245,158,11,.05);}
+.jc-pkg-icon{font-size:28px;margin-bottom:6px;}
+.jc-pkg-coins{color:var(--t1);font-size:14px;font-weight:800;}
+.jc-pkg-pkr{color:var(--g4);font-size:12px;font-weight:700;margin-top:2px;}
+</style>
 </body>
 </html>
