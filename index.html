@@ -1566,7 +1566,18 @@ function verifyOTP(){
       showToast('Galat OTP — dobara check karein');
     });
 }
-function demoLogin(){}
+function demoLogin(){
+  APP.user = {
+    name: 'Test User',
+    city: 'Karachi',
+    bio: 'Hamara App Test',
+    phone: '+923000000000',
+    initials: 'TU'
+  };
+  localStorage.setItem('hm_user_v7', JSON.stringify(APP.user));
+  showToast('Demo mode mein login ho gaye! 🎉');
+  goMainApp();
+}
 window.saveProfile = async function() {
   var name = document.getElementById('setup-name').value.trim();
   var city = document.getElementById('setup-city').value.trim();
