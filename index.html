@@ -8,8 +8,8 @@
 <meta name="mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="Hamara"/>
-<title>Hamara v10 FINAL</title>
+<meta name="apple-mobile-web-app-title" content="Hamara v11"/>
+<title>Hamara v11 FINAL</title>
 <link rel="manifest" href="/manifest.json">
 
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
 /* ═══════════════════════════════════════════════
-   HAMARA v10 FINAL — COMPLETE DESIGN SYSTEM
+   HAMARA v11 FINAL — COMPLETE DESIGN SYSTEM
    ═══════════════════════════════════════════════ */
 :root{
   --bg:#080d0b;--bg2:#0e1612;--bg3:#141f1a;--bg4:#1a2820;--bg5:#1f3028;
@@ -467,7 +467,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 
 
 /* ════════════════════════════════════════════════════════════
-   HAMARA v10 FINAL — COMPLETE GLOBAL DESIGN SYSTEM
+   HAMARA v11 FINAL — COMPLETE GLOBAL DESIGN SYSTEM
    ════════════════════════════════════════════════════════════ */
 
 /* Global Language Support */
@@ -659,7 +659,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 .onboard-dot.active{background:var(--g3);width:24px;border-radius:4px;}
 
 /* ═══════════════════════════════════════════════
-   HAMARA v10 FINAL — NEW FEATURES CSS
+   HAMARA v11 FINAL — NEW FEATURES CSS
    ═══════════════════════════════════════════════ */
 
 /* PWA Install Banner */
@@ -757,6 +757,39 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
 <script src="https://download.agora.io/sdk/release/AgoraRTC_N-4.21.0.js"></script>
+
+<style id="v11-layout-fix">
+/* ═══ HAMARA v11 — LAYOUT FIX (HIGHEST PRIORITY) ═══ */
+html { height:100% !important; margin:0 !important; padding:0 !important; }
+body {
+  margin:0 !important;
+  padding:0 !important;
+  height:100% !important;
+  overflow:hidden !important;
+  background:#080d0b !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  font-family:'Outfit',sans-serif !important;
+}
+#app {
+  position:fixed !important;
+  top:0 !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  width:100% !important;
+  max-width:480px !important;
+  height:100vh !important;
+  height:100dvh !important;
+  overflow:hidden !important;
+  display:flex !important;
+  flex-direction:column !important;
+  background:var(--bg,#080d0b) !important;
+  z-index:10 !important;
+}
+.screen { display:none !important; }
+.screen.active { display:flex !important; flex-direction:column !important; overflow:hidden !important; flex:1 !important; }
+</style>
 </head>
 <body>
 
@@ -767,7 +800,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 <div class="screen active" id="s-loading" style="align-items:center;justify-content:center;gap:20px;background:var(--bg);">
   <div class="logo-pulse">🌍</div>
   <div style="text-align:center;">
-    <div style="color:var(--g3);font-size:13px;font-weight:700;letter-spacing:1.5px;">HAMARA v10 FINAL</div>
+    <div style="color:var(--g3);font-size:13px;font-weight:700;letter-spacing:1.5px;">HAMARA v11 FINAL</div>
     <div style="width:160px;height:3px;background:var(--bg4);border-radius:3px;overflow:hidden;margin:14px auto 0;">
       <div class="progress-fill" style="width:0%;height:100%;"></div>
     </div>
@@ -1516,7 +1549,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
     <div style="padding:10px 14px 6px;color:var(--d1);font-size:11px;font-weight:700;letter-spacing:.8px;">TRANSACTIONS</div>
     <div class="txn-row"><div class="txn-icon" style="background:#10b98120;">🎥</div><div style="flex:1;"><div style="color:var(--t1);font-size:14px;font-weight:700;">Video Views</div><div style="color:var(--d2);font-size:12px;">Aaj • 48K views</div></div><div class="txn-pos">+2,400 🪙</div></div>
     <div class="txn-row"><div class="txn-icon" style="background:#38bdf820;">🎁</div><div style="flex:1;"><div style="color:var(--t1);font-size:14px;font-weight:700;">Gifts Received</div><div style="color:var(--d2);font-size:12px;">Kal • 12 gifts</div></div><div class="txn-pos">+600 🪙</div></div>
-    <div class="txn-row"><div class="txn-icon" style="background:#a78bfa20;">👥</div><div style="flex:1;"><div style="color:var(--t1);font-size:14px;font-weight:700;">Referral Bonus</div><div style="color:var(--d2);font-size:12px;">3 din pehle</div></div><div class="txn-pos">+500 🪙</div></div>
+
     <div class="txn-row"><div class="txn-icon" style="background:#f59e0b20;">🏆</div><div style="flex:1;"><div style="color:var(--t1);font-size:14px;font-weight:700;">Creator Bonus</div><div style="color:var(--d2);font-size:12px;">5 din pehle</div></div><div class="txn-pos">+5,000 🪙</div></div>
     <div class="txn-row"><div class="txn-icon" style="background:#f43f5e20;">💸</div><div style="flex:1;"><div style="color:var(--t1);font-size:14px;font-weight:700;">Withdrawal</div><div style="color:var(--d2);font-size:12px;">7 din pehle • EasyPaisa</div></div><div class="txn-neg">-10,000 🪙</div></div>
     <div style="padding:14px;background:var(--bg2);margin:12px 14px;border-radius:14px;border:1px solid var(--bc);">
@@ -1699,7 +1732,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 
 <script type="module">
 /* ═══════════════════════════════════════════════════════════
-   HAMARA v10 FINAL — COMPLETE JAVASCRIPT
+   HAMARA v11 FINAL — COMPLETE JAVASCRIPT
    ═══════════════════════════════════════════════════════════ */
 
 /* ── FIREBASE PHONE AUTH ── */
@@ -2633,7 +2666,7 @@ function addLiveComment(){var inp=$('live-inp');var txt=inp.value.trim();if(!txt
 
 /* ── GIFTS ── */
 function sendGift(el,em,name,price){
-  if(APP.walletCoins<price){showToast('Coins insufficient 💸');return;}
+  if(APP.walletCoins<price){showToast('Pehle coins khareedein 💸');return;}
   APP.walletCoins-=price;
   qsa('.gift-item').forEach(function(g){g.classList.remove('sel');});
   el.classList.add('sel');
@@ -2642,6 +2675,8 @@ function sendGift(el,em,name,price){
   gf.style.left=Math.random()*60+20+'%';gf.style.bottom='100px';
   document.body.appendChild(gf);
   setTimeout(function(){gf.remove();},2000);
+  var hid=APP.currentLiveHostId||null;
+  if(hid&&window.addCoinsToUser){addCoinsToUser(hid,price,'gift_received');}
   saveState();showToast(em+' '+name+' bheja! -'+price+' 🪙');
 }
 
@@ -4948,12 +4983,13 @@ function selectCoinPkg(i) {
   selectedCoinPkg._index = i;
 }
 
-function buyCoinPkg() {
+async function buyCoinPkg() {
   if(!selectedCoinPkg) return;
-  liveCoins += selectedCoinPkg.coins;
-  updateCoinDisplay();
+  const uid = firebase?.auth?.()?.currentUser?.uid;
+  if(uid) { await addCoinsToUser(uid, selectedCoinPkg.coins, 'purchase'); }
+  else { liveCoins += selectedCoinPkg.coins; updateCoinDisplay(); }
   closeCoinBuy();
-  showLiveToast(`🪙 ${selectedCoinPkg.coins.toLocaleString()} Coins mil gaye!`);
+  showLiveToast('🪙 ' + selectedCoinPkg.coins.toLocaleString() + ' Coins khareed liye! ✅');
   triggerConfetti();
 }
 
@@ -7494,7 +7530,7 @@ async function createProfile() {
     };
 
     await db.collection('users').doc(currentUser.uid).set(currentUserData);
-    showFbToast('🎉 Welcome ' + name + '! 50 free coins mile!');
+    showFbToast('🎉 Welcome ' + name + '! Hamara mein khush aamdeed! 🇵🇰');
     loginSuccess();
   } catch(e) {
     console.error('Profile create error:', e);
@@ -7607,25 +7643,20 @@ function listenToChat(chatId, callback) {
 // COINS SYSTEM — Real Firebase
 // ══════════════════════════════════════
 async function addCoinsToUser(uid, amount, reason) {
+  if (!['purchase','gift_received'].includes(reason)) {
+    console.warn('Coins BLOCKED:', reason); return;
+  }
   try {
     await db.collection('users').doc(uid).update({
       coins: firebase.firestore.FieldValue.increment(amount)
     });
-    // Log transaction
     await db.collection('transactions').add({
-      uid: uid,
-      amount: amount,
-      reason: reason,
+      uid, amount, reason,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       type: 'credit'
     });
-    if (uid === currentUser?.uid) {
-      liveCoins += amount;
-      updateCoinDisplay();
-    }
-  } catch(e) {
-    console.error('Coins error:', e);
-  }
+    if (uid === currentUser?.uid) { liveCoins += amount; updateCoinDisplay(); }
+  } catch(e) { console.error('Coins error:', e); }
 }
 
 async function deductCoins(amount, reason) {
@@ -8119,7 +8150,7 @@ console.log('🔑 Dynamic Token System Ready!');
 
 
 <!-- ══════════════════════════════════════════
-   HAMARA v10 FINAL — NEW FEATURES HTML
+   HAMARA v11 FINAL — NEW FEATURES HTML
    ══════════════════════════════════════════ -->
 
 <!-- PWA Install Banner -->
@@ -8240,7 +8271,7 @@ console.log('🔑 Dynamic Token System Ready!');
 
 <script>
 // ═══════════════════════════════════════════════════════
-//   HAMARA v10 FINAL — NEW FEATURES JAVASCRIPT
+//   HAMARA v11 FINAL — NEW FEATURES JAVASCRIPT
 // ═══════════════════════════════════════════════════════
 
 // ── 1. PWA / SERVICE WORKER ──────────────────────────
@@ -8367,9 +8398,21 @@ function closeMonetizationPanel() {
   document.getElementById('monetization-panel').style.display = 'none';
 }
 
-function withdrawEarnings() {
-  const uid = firebase?.auth?.()?.currentUser?.uid || 'demo';
-  const stored = JSON.parse(localStorage.getItem('creator_stats_' + uid) || '{}');
+async function withdrawEarnings() {
+  const uid=firebase?.auth?.()?.currentUser?.uid;
+  if(!uid){showToast('Sirf gift coins withdraw ho sakte hain!');return;}
+  try{
+    const snap=await db.collection('transactions').where('uid','==',uid).where('reason','==','gift_received').get();
+    let gc=0;snap.forEach(function(d){gc+=(d.data().amount||0);});
+    const ud=await db.collection('users').doc(uid).get();
+    const wd=ud.data()?.totalWithdrawn||0;
+    const av=Math.max(0,gc-wd);const rs=Math.floor(av/10);
+    if(rs<500){showToast('Sirf Rs.'+rs+' gift coins hain. Min Rs.500 chahiye!');return;}
+    await db.collection('users').doc(uid).update({totalWithdrawn:firebase.firestore.FieldValue.increment(av)});
+    await db.collection('withdrawals').add({uid,amount:rs,coins:av,reason:'gift_received_withdrawal',status:'pending',timestamp:firebase.firestore.FieldValue.serverTimestamp()});
+    showToast('Rs.'+rs+' withdraw request! 24 ghante mein process.');
+  }catch(e){showToast('Sirf gift se milne wale coins withdraw ho sakte hain!');}
+}');
   if ((stored.weekly || 0) < 500) {
     showToast('❌ Minimum ₨500 chahiye withdraw ke liye!');
   } else {
@@ -8634,7 +8677,7 @@ console.log('🚀 Hamara v10 FINAL — All new features loaded!');
 
 
 <!-- ═══════════════════════════════════════════════════════════
-   HAMARA v10 FINAL — ALL NEW HTML PANELS & SCREENS
+   HAMARA v11 FINAL — ALL NEW HTML PANELS & SCREENS
    ═══════════════════════════════════════════════════════════ -->
 
 <!-- ── COUNTRY CODE PICKER ── -->
@@ -8972,7 +9015,7 @@ console.log('🚀 Hamara v10 FINAL — All new features loaded!');
 
 <script>
 // ═══════════════════════════════════════════════════════════════════
-//   HAMARA v10 FINAL — COMPLETE FEATURE JAVASCRIPT
+//   HAMARA v11 FINAL — COMPLETE FEATURE JAVASCRIPT
 // ═══════════════════════════════════════════════════════════════════
 
 // ── WORLD COUNTRIES DATABASE ─────────────────────────────────────
@@ -10194,7 +10237,442 @@ function exportChatHTML() {
       <b style="font-size:11px;color:#64748b;">${m.sender}</b><br>${m.text}
       <div style="font-size:10px;color:#94a3b8;margin-top:4px;">${m.time}</div>
     </div>`).join('');
-  const htmlContent = `<!DOCTYPE html><html><head><title>${exportChatName} — Hamara Chat</title><meta charset="UTF-8"><style>body{font-family:sans-serif;padding:20px;max-width:480px;margin:auto;background:#f8fafc;}</style></head><body><h2 style="color:#064e3b;">💬 ${exportChatName}</h2><p style="color:#64748b;font-size:12px;">Exported from Hamara App • ${new Date().toLocaleString()}</p><div style="margin-top:16px;">${rows}</div></body></html>`;
+  const htmlContent = `<!DOCTYPE html><html><head><title>${exportChatName} — Hamara Chat</title><meta charset="UTF-8"><style>body{font-family:sans-serif;padding:20px;max-width:480px;margin:auto;background:#f8fafc;}</style>
+<style id="v11-layout-fix">
+/* ═══ HAMARA v11 — LAYOUT FIX (HIGHEST PRIORITY) ═══ */
+html { height:100% !important; margin:0 !important; padding:0 !important; }
+body {
+  margin:0 !important;
+  padding:0 !important;
+  height:100% !important;
+  overflow:hidden !important;
+  background:#080d0b !important;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  font-family:'Outfit',sans-serif !important;
+}
+#app {
+  position:fixed !important;
+  top:0 !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  width:100% !important;
+  max-width:480px !important;
+  height:100vh !important;
+  height:100dvh !important;
+  overflow:hidden !important;
+  display:flex !important;
+  flex-direction:column !important;
+  background:var(--bg,#080d0b) !important;
+  z-index:10 !important;
+}
+.screen { display:none !important; }
+.screen.active { display:flex !important; flex-direction:column !important; overflow:hidden !important; flex:1 !important; }
+</style>
+</head><body><h2 style="color:#064e3b;">💬 ${exportChatName}</h2><p style="color:#64748b;font-size:12px;">Exported from Hamara App • ${new Date().toLocaleString()}</p><div style="margin-top:16px;">${rows}</div>
+<!-- ══════════ HAMARA v11 — WHATSAPP CHAT + FEATURES ══════════ -->
+<style>
+/* WhatsApp Chat Screen */
+#wa-screen {
+  position:fixed !important;
+  inset:0 !important;
+  max-width:480px !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  background:var(--bg,#080d0b) !important;
+  z-index:600 !important;
+  display:none;
+  flex-direction:column;
+}
+#wa-screen.open { display:flex !important; }
+.wa-out { background:#064e3b; color:#fff; border-radius:16px 4px 16px 16px; padding:8px 12px; max-width:75%; align-self:flex-end; margin:2px 12px; font-size:14px; line-height:1.5; word-break:break-word; }
+.wa-in  { background:var(--bg3,#141f1a); color:var(--t1,#fff); border-radius:4px 16px 16px 16px; padding:8px 12px; max-width:75%; align-self:flex-start; margin:2px 12px; font-size:14px; line-height:1.5; word-break:break-word; }
+.wa-t   { font-size:10px; opacity:0.55; margin-top:3px; text-align:right; }
+.wa-tk  { color:#34d399; }
+.feat-panel { position:fixed; inset:0; z-index:400; background:var(--bg,#080d0b); display:flex; flex-direction:column; transform:translateX(100%); transition:transform .3s cubic-bezier(.25,.46,.45,.94); max-width:480px; width:100%; left:50%; margin-left:-240px; }
+@media(max-width:480px){ .feat-panel{ left:0; margin-left:0; } }
+.feat-panel.open { transform:translateX(0); }
+</style>
+
+<!-- WHATSAPP CHAT SCREEN -->
+<div id="wa-screen">
+  <div style="background:var(--bg2,#0e1612);padding:10px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bdr,#1a2820);flex-shrink:0;">
+    <button onclick="closeWA()" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px 10px 6px 4px;"><i class="fas fa-arrow-left" style="font-size:18px;"></i></button>
+    <div id="wa-av" style="width:40px;height:40px;border-radius:50%;background:var(--accent,#10b981);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;">?</div>
+    <div style="flex:1;">
+      <div id="wa-name" style="font-weight:700;color:var(--t1,#fff);font-size:15px;">Chat</div>
+      <div id="wa-status" style="font-size:12px;color:#34d399;">Online</div>
+    </div>
+    <button onclick="try{startVoiceCall();}catch(e){showToast('Voice call!');}" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px;"><i class="fas fa-phone" style="font-size:17px;"></i></button>
+    <button onclick="try{startVideoCall();}catch(e){showToast('Video call!');}" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px;"><i class="fas fa-video" style="font-size:17px;"></i></button>
+    <button onclick="showToast('Chat options!')" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px;"><i class="fas fa-ellipsis-v" style="font-size:17px;"></i></button>
+  </div>
+  <div id="wa-msgs" style="flex:1;overflow-y:auto;padding:8px 0;display:flex;flex-direction:column;gap:2px;"></div>
+  <div id="wa-typing-bar" style="display:none;padding:3px 16px;font-size:12px;color:#34d399;font-style:italic;flex-shrink:0;">typing...</div>
+  <div style="padding:8px 10px;background:var(--bg2,#0e1612);border-top:1px solid var(--bdr,#1a2820);display:flex;align-items:center;gap:8px;flex-shrink:0;">
+    <button onclick="openAttachSheet()" style="background:none;border:none;color:var(--d2,#6b7280);cursor:pointer;font-size:18px;padding:4px;"><i class="fas fa-paperclip"></i></button>
+    <input id="wa-inp" type="text" placeholder="Message..." style="flex:1;padding:10px 14px;border-radius:22px;border:none;background:var(--bg3,#141f1a);color:var(--t1,#fff);font-size:15px;font-family:Outfit,sans-serif;outline:none;" onkeydown="if(event.key==='Enter')sendWA()">
+    <button onclick="sendWA()" style="width:44px;height:44px;border-radius:50%;background:var(--accent,#10b981);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<!-- NEW SCREENS -->
+<div class="feat-panel" id="s-saved-messages">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-saved-messages')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">🔖 Saved Messages</span></div>
+<div id="notes-list" style="flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;"></div>
+<div style="padding:10px;border-top:1px solid var(--bdr);display:flex;gap:8px;">
+<input id="note-inp" type="text" placeholder="Note likhein..." style="flex:1;padding:10px 14px;border-radius:22px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);" onkeydown="if(event.key==='Enter')saveNote()">
+<button onclick="saveNote()" style="background:var(--accent);border:none;border-radius:50%;width:42px;height:42px;color:#fff;cursor:pointer;font-size:16px;"><i class="fas fa-bookmark"></i></button>
+</div>
+</div>
+
+<div class="feat-panel" id="s-channels">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-channels')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">📢 Channels</span></div>
+<div style="padding:12px;overflow-y:auto;flex:1;"><div id="ch-list"></div></div>
+</div>
+
+<div class="feat-panel" id="s-friend-suggest">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-friend-suggest')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">👥 Suggested Friends</span></div>
+<div style="padding:12px;overflow-y:auto;flex:1;"><div id="fs-list"></div></div>
+</div>
+
+<div class="feat-panel" id="s-app-info">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-app-info')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">ℹ️ App Info</span></div>
+<div style="padding:20px;overflow-y:auto;flex:1;">
+<div style="text-align:center;padding:30px;background:var(--bg3,#141f1a);border-radius:16px;margin-bottom:16px;">
+<div style="font-size:40px;">🇵🇰</div>
+<div style="font-size:22px;font-weight:800;color:var(--t1);margin-top:10px;">Hamara</div>
+<div style="color:var(--accent);font-weight:700;margin-top:4px;">Version 11.0 FINAL</div>
+<div style="font-size:12px;color:var(--d2);margin-top:6px;">Made with ❤️ for Pakistan</div>
+</div>
+<div style="background:var(--bg3,#141f1a);border-radius:12px;padding:16px;">
+<div style="font-weight:700;color:var(--t1);margin-bottom:10px;">🔞 Age Verify</div>
+<input type="date" id="age-dob" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg,#080d0b);color:var(--t1);box-sizing:border-box;margin-bottom:10px;">
+<button onclick="doAgeVerify()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;">✅ Verify Karein</button>
+</div>
+</div>
+</div>
+
+<div class="feat-panel" id="s-search">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-search')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">🔍 Search</span></div>
+<div style="padding:12px;overflow-y:auto;flex:1;">
+<div style="position:relative;margin-bottom:14px;">
+<input id="srch-inp" type="text" placeholder="Users, videos, hashtags..." style="width:100%;padding:11px 11px 11px 40px;border-radius:12px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);font-size:15px;box-sizing:border-box;" oninput="doSearch(this.value)">
+<i class="fas fa-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--d2);"></i>
+</div>
+<div id="srch-res"></div>
+<div style="font-size:13px;font-weight:700;color:var(--d2);margin-bottom:10px;">🔥 Trending</div>
+<div id="srch-trend"></div>
+</div>
+</div>
+
+<div class="feat-panel" id="s-live-poll">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-live-poll')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">📊 Live Poll</span></div>
+<div style="padding:16px;overflow-y:auto;flex:1;">
+<input id="lp-q" type="text" placeholder="Poll question..." style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:10px;box-sizing:border-box;">
+<div id="lp-opts"><input class="lp-opt" type="text" placeholder="Option A" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:8px;box-sizing:border-box;"><input class="lp-opt" type="text" placeholder="Option B" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:8px;box-sizing:border-box;"></div>
+<button onclick="addLPO()" style="color:var(--accent);background:none;border:none;cursor:pointer;font-size:14px;margin-bottom:14px;padding:0;">+ Option Add Karein</button>
+<button onclick="goLP()" style="width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:16px;">🚀 Poll Start Karein</button>
+<div id="lp-res" style="margin-top:16px;"></div>
+</div>
+</div>
+
+<div class="feat-panel" id="s-photo-post">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-photo-post')"><i class="fas fa-times"></i></button><span class="topbar-title">📸 Photo Post</span><button onclick="doPP()" style="background:var(--accent);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-weight:700;cursor:pointer;">Post</button></div>
+<div style="padding:14px;overflow-y:auto;flex:1;">
+<div id="pp-prev" style="display:flex;gap:8px;overflow-x:auto;margin-bottom:12px;min-height:90px;align-items:center;padding-bottom:4px;">
+<div onclick="document.getElementById('pp-finp').click()" style="width:80px;height:80px;background:var(--bg3,#141f1a);border-radius:12px;border:2px dashed var(--bdr);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><i class="fas fa-plus" style="color:var(--d2);font-size:24px;"></i></div>
+</div>
+<textarea id="pp-cap" placeholder="Caption likhein..." rows="3" style="width:100%;padding:12px;border-radius:12px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);resize:none;box-sizing:border-box;font-family:Outfit,sans-serif;margin-bottom:12px;font-size:15px;"></textarea>
+<div style="background:var(--bg3,#141f1a);border-radius:12px;padding:14px;">
+<div style="font-weight:700;color:var(--t1);margin-bottom:8px;">📅 Post Later</div>
+<input type="datetime-local" id="pp-sched" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg,#080d0b);color:var(--t1);box-sizing:border-box;">
+</div>
+</div>
+<input type="file" id="pp-finp" accept="image/*" multiple style="display:none;" onchange="handlePP(this)">
+</div>
+
+<div class="feat-panel" id="s-donation-goal">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-donation-goal')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">🎯 Donation Goal</span></div>
+<div style="padding:16px;overflow-y:auto;flex:1;">
+<div style="background:var(--bg3,#141f1a);border-radius:16px;padding:20px;margin-bottom:16px;">
+<div id="dg-t" style="font-size:17px;font-weight:800;color:var(--t1);margin-bottom:8px;">Koi goal nahi abhi</div>
+<div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span id="dg-c" style="color:var(--accent);font-weight:700;">0 🪙</span><span style="color:var(--d2);">of <span id="dg-x">0 🪙</span></span></div>
+<div style="height:10px;background:var(--bdr);border-radius:5px;overflow:hidden;"><div id="dg-bar" style="height:100%;background:var(--accent);width:0%;border-radius:5px;transition:width 0.5s;"></div></div>
+</div>
+<input id="dg-ti" type="text" placeholder="Goal naam..." style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:10px;box-sizing:border-box;">
+<input id="dg-ai" type="number" placeholder="Target coins (e.g. 5000)..." style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:14px;box-sizing:border-box;">
+<button onclick="setDG()" style="width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;">🎯 Goal Set Karein</button>
+</div>
+</div>
+
+<!-- CLOSE FRIENDS SHEET -->
+<div id="cf-sheet" style="display:none;position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:auto;background:var(--bg2,#0e1612);border-radius:20px 20px 0 0;padding:20px;z-index:9998;max-height:70vh;overflow-y:auto;box-shadow:0 -4px 30px #0005;">
+<div style="font-weight:700;color:var(--t1);margin-bottom:4px;font-size:16px;">💚 Close Friends</div>
+<div style="font-size:13px;color:var(--d2);margin-bottom:14px;">Story sirf inhe dikhegi</div>
+<div id="cf-contacts"></div>
+<button onclick="saveCF()" style="width:100%;margin-top:14px;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:15px;">✅ Save</button>
+<button onclick="document.getElementById('cf-sheet').style.display='none'" style="width:100%;margin-top:8px;padding:12px;background:var(--bg3,#141f1a);border:1.5px solid var(--bdr);border-radius:12px;color:var(--t1);cursor:pointer;">Cancel</button>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// HAMARA v11 — ALL FEATURES & WHATSAPP CHAT
+// ══════════════════════════════════════════════
+
+// ── WHATSAPP CHAT ──────────────────────────────
+var _WA = null;
+
+function openWAChat(id) {
+  var chat = APP && APP.chats ? APP.chats.find(function(c){return c.id===id;}) : null;
+  _WA = chat || {id:id, n:'Chat', in:'?', av:'', online:false};
+  var sc = document.getElementById('wa-screen');
+  if (!sc) return;
+  sc.classList.add('open');
+  var av = document.getElementById('wa-av');
+  var nm = document.getElementById('wa-name');
+  var st = document.getElementById('wa-status');
+  if (av) { av.textContent = _WA.in || '?'; }
+  if (nm) { nm.textContent = _WA.n + (_WA.verified ? ' ✅' : ''); }
+  if (st) { st.textContent = _WA.online ? 'Online' : 'Last seen recently'; st.style.color = _WA.online ? '#34d399' : 'var(--d2)'; }
+  renderWAMsgs(id);
+  if (_WA.unread) { _WA.unread = 0; try{renderChatList();}catch(e){} }
+}
+
+function closeWA() {
+  var sc = document.getElementById('wa-screen');
+  if (sc) sc.classList.remove('open');
+  _WA = null;
+}
+
+function renderWAMsgs(cid) {
+  var area = document.getElementById('wa-msgs');
+  if (!area) return;
+  var msgs = (APP && APP.msgs && APP.msgs[cid]) ? APP.msgs[cid] : [
+    {f:'t', m:'Assalam o Alaikum! 👋', t:'10:00 AM'},
+    {f:'m', m:'Walaikum Assalam! Kya haal hai? 😊', t:'10:01 AM'},
+    {f:'t', m:'Alhamdulillah! Aap sunao?', t:'10:02 AM'},
+    {f:'m', m:'Main bhi theek hoon, shukriya!', t:'10:03 AM'},
+    {f:'t', m:'Koi kaam tha? Batao 😊', t:'10:04 AM'},
+  ];
+  if (!msgs.length) {
+    area.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--d2);"><div style="font-size:48px;margin-bottom:12px;">💬</div><div>Koi message nahi abhi tak<br>Salaam bhejo! 👋</div></div>';
+    return;
+  }
+  area.innerHTML = msgs.map(function(m) {
+    var isMe = m.f === 'm';
+    return '<div style="display:flex;flex-direction:column;align-items:' + (isMe?'flex-end':'flex-start') + ';margin:1px 0;">' +
+      '<div class="' + (isMe?'wa-out':'wa-in') + '">' +
+        '<div>' + escHtml(m.m||m.text||'') + '</div>' +
+        '<div class="wa-t">' + (m.t||m.time||'') + (isMe?' <span class="wa-tk">✓✓</span>':'') + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  area.scrollTop = area.scrollHeight;
+}
+
+function sendWA() {
+  var inp = document.getElementById('wa-inp');
+  var txt = inp ? inp.value.trim() : '';
+  if (!txt || !_WA) { if(!_WA){showToast('Chat open karein pehle!');} return; }
+  if (!APP.msgs) APP.msgs = {};
+  if (!APP.msgs[_WA.id]) APP.msgs[_WA.id] = [];
+  var now = new Date();
+  var t = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0') + ' ' + (now.getHours()<12?'AM':'PM');
+  APP.msgs[_WA.id].push({f:'m', m:txt, t:t});
+  if (inp) inp.value = '';
+  renderWAMsgs(_WA.id);
+  try { localStorage.setItem('hm_msgs', JSON.stringify(APP.msgs)); } catch(e) {}
+  var tb = document.getElementById('wa-typing-bar');
+  if (tb) tb.style.display = 'block';
+  var cid = _WA.id;
+  setTimeout(function() {
+    if (tb) tb.style.display = 'none';
+    var replies = ['Haan bilkul! 😊','Theek hai!','JazakAllah 🤲','Okay sure!','Alhamdulillah! 🌙','Haan zaroor 👍','Kal baat karte hain','❤️ شکریہ','Thori der mein bataata hoon'];
+    if (APP.msgs[cid] && _WA && _WA.id === cid) {
+      APP.msgs[cid].push({f:'t', m:replies[Math.floor(Math.random()*replies.length)], t:t});
+      renderWAMsgs(cid);
+    }
+  }, 1200 + Math.random()*800);
+}
+
+// Override original openChat
+window.openChat = openWAChat;
+
+// Patch chat list every 300ms to use openWAChat
+setInterval(function() {
+  document.querySelectorAll('[onclick*="openChat("]').forEach(function(el) {
+    var oc = el.getAttribute('onclick');
+    if (oc && oc.indexOf('openWAChat') < 0) {
+      el.setAttribute('onclick', oc.split('openChat(').join('openWAChat('));
+    }
+  });
+}, 300);
+
+// ── SAVED MESSAGES ──────────────────────────────
+function openSavedMessages() { openFeat('s-saved-messages'); renderNotes(); }
+function renderNotes() {
+  var el = document.getElementById('notes-list');
+  if (!el) return;
+  var n = JSON.parse(localStorage.getItem('hm_notes')||'[]');
+  el.innerHTML = n.length ? n.map(function(x,i){
+    return '<div style="background:var(--bg3,#141f1a);border-radius:12px;padding:12px;position:relative;">' +
+      '<div style="color:var(--t1);font-size:14px;padding-right:28px;">' + escHtml(x.t) + '</div>' +
+      '<div style="font-size:11px;color:var(--d2);margin-top:6px;">' + new Date(x.d).toLocaleString() + '</div>' +
+      '<button onclick="delNote('+i+')" style="position:absolute;top:10px;right:10px;background:none;border:none;color:var(--d2);cursor:pointer;font-size:14px;">🗑️</button>' +
+    '</div>';
+  }).join('') : '<div style="text-align:center;padding:50px 20px;color:var(--d2);"><div style="font-size:48px;margin-bottom:12px;">🔖</div><div>Koi note nahi<br>Kuch likhein!</div></div>';
+}
+function saveNote() {
+  var inp = document.getElementById('note-inp');
+  if (!inp || !inp.value.trim()) return;
+  var n = JSON.parse(localStorage.getItem('hm_notes')||'[]');
+  n.unshift({t:inp.value.trim(), d:Date.now()});
+  localStorage.setItem('hm_notes', JSON.stringify(n));
+  inp.value = ''; renderNotes(); showToast('🔖 Note save!');
+}
+function delNote(i) {
+  var n = JSON.parse(localStorage.getItem('hm_notes')||'[]');
+  n.splice(i,1); localStorage.setItem('hm_notes',JSON.stringify(n)); renderNotes();
+}
+
+// ── CHANNELS ──────────────────────────────
+function openChannels() { openFeat('s-channels'); renderCH(); }
+function renderCH() {
+  var el = document.getElementById('ch-list'); if (!el) return;
+  var ch = [{n:'Hamara Official',em:'🇵🇰',s:'1.2M',v:true},{n:'Cricket Updates',em:'🏏',s:'850K',v:false},{n:'Pak News',em:'📰',s:'500K',v:true}];
+  el.innerHTML = ch.map(function(c) {
+    return '<div style="background:var(--bg3,#141f1a);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;">' +
+      '<div style="width:50px;height:50px;border-radius:50%;background:var(--accent,#10b981)20;display:flex;align-items:center;justify-content:center;font-size:26px;">' + c.em + '</div>' +
+      '<div style="flex:1;"><div style="font-weight:700;color:var(--t1);">' + c.n + (c.v?' ✅':'') + '</div><div style="font-size:12px;color:var(--d2);">' + c.s + ' subscribers</div></div>' +
+      '<button onclick="this.textContent='✅';this.style.background='#10b981'" style="padding:7px 14px;background:var(--accent,#10b981);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;">Subscribe</button>' +
+    '</div>';
+  }).join('');
+}
+
+// ── FRIENDS SUGGESTION ──────────────────────────────
+function openFriendSuggestions() { openFeat('s-friend-suggest'); renderFS(); }
+function renderFS() {
+  var el = document.getElementById('fs-list'); if (!el) return;
+  var f = [{n:'Bilal Ahmed',u:'@bilal_pk',m:5,av:'🧑'},{n:'Fatima Zahra',u:'@fatima_z',m:3,av:'👩'},{n:'Usman Malik',u:'@usman_m',m:8,av:'👨'},{n:'Hira Khan',u:'@hira_k',m:2,av:'👧'}];
+  el.innerHTML = f.map(function(p) {
+    return '<div style="background:var(--bg3,#141f1a);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;">' +
+      '<div style="width:48px;height:48px;border-radius:50%;background:var(--accent,#10b981)20;display:flex;align-items:center;justify-content:center;font-size:26px;">' + p.av + '</div>' +
+      '<div style="flex:1;"><div style="font-weight:700;color:var(--t1);">' + p.n + '</div><div style="font-size:12px;color:var(--d2);">' + p.u + ' • ' + p.m + ' mutual</div></div>' +
+      '<button onclick="this.textContent='✅ Following';this.style.background='#10b981'" style="padding:7px 14px;background:var(--accent,#10b981);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;">Follow</button>' +
+    '</div>';
+  }).join('');
+}
+
+// ── SEARCH ──────────────────────────────
+function openSearchScreen() { openFeat('s-search'); loadTrend(); }
+function doSearch(q) {
+  var res = document.getElementById('srch-res'); if (!res) return;
+  if (!q || q.length < 2) { res.innerHTML = ''; return; }
+  var d = [{n:'Ahmed Khan',s:'@ahmed_pk',ic:'👨'},{n:'#'+q,s:'2.3K posts',ic:'#️⃣'},{n:q+' video',s:'12K views',ic:'🎬'}];
+  res.innerHTML = d.map(function(x) {
+    return '<div onclick="showToast(''+x.n+'!')" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr);cursor:pointer;">' +
+      '<div style="width:44px;height:44px;border-radius:50%;background:var(--bg3,#141f1a);display:flex;align-items:center;justify-content:center;font-size:22px;">' + x.ic + '</div>' +
+      '<div><div style="font-weight:700;color:var(--t1);">' + x.n + '</div><div style="font-size:12px;color:var(--d2);">' + x.s + '</div></div>' +
+    '</div>';
+  }).join('');
+}
+function loadTrend() {
+  var el = document.getElementById('srch-trend'); if (!el) return;
+  ['#Pakistan','Ahmed Shah','Karachi Vlog','Cricket 2025','Eid Special'].forEach(function(t,i) {
+    el.innerHTML += '<div onclick="document.getElementById('srch-inp').value=''+t+'';doSearch(''+t+'')" style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--bdr);cursor:pointer;"><span style="color:var(--accent);font-weight:700;width:22px;">'+(i+1)+'</span><span style="color:var(--t1);">'+t+'</span><i class="fas fa-arrow-trend-up" style="margin-left:auto;color:var(--d2);font-size:11px;"></i></div>';
+  });
+}
+
+// ── LIVE POLL ──────────────────────────────
+var _lp = null, _lpInt = null;
+function openLivePollScreen() { openFeat('s-live-poll'); }
+function addLPO() {
+  var w = document.getElementById('lp-opts'); if (!w) return;
+  if (w.querySelectorAll('.lp-opt').length >= 6) { showToast('Max 6 options!'); return; }
+  var i = document.createElement('input'); i.className='lp-opt'; i.type='text';
+  i.placeholder='Option '+String.fromCharCode(65+w.querySelectorAll('.lp-opt').length);
+  i.style.cssText='width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:8px;box-sizing:border-box;';
+  w.appendChild(i);
+}
+function goLP() {
+  var q = document.getElementById('lp-q') ? document.getElementById('lp-q').value.trim() : '';
+  var opts = Array.from(document.querySelectorAll('.lp-opt')).map(function(x){return x.value.trim();}).filter(Boolean);
+  if (!q || opts.length < 2) { showToast('Question aur min 2 options dein!'); return; }
+  _lp = {q:q, opts:opts, votes:opts.map(function(){return 0;})};
+  if (_lpInt) clearInterval(_lpInt);
+  _lpInt = setInterval(function(){if(!_lp)return;_lp.votes[Math.floor(Math.random()*_lp.votes.length)]++;showLP();},800);
+  showLP(); showToast('📊 Poll live!');
+}
+function showLP() {
+  var el = document.getElementById('lp-res'); if (!el||!_lp) return;
+  var tot = _lp.votes.reduce(function(a,b){return a+b;},0)||1;
+  el.innerHTML = '<div style="font-weight:700;color:var(--t1);margin-bottom:12px;">'+escHtml(_lp.q)+'</div>' +
+    _lp.opts.map(function(o,i){var p=Math.round(_lp.votes[i]/tot*100); return '<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="color:var(--t1);">'+escHtml(o)+'</span><span style="color:var(--accent);font-weight:700;">'+p+'%</span></div><div style="height:8px;background:var(--bdr);border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+p+'%;background:var(--accent);border-radius:4px;transition:width 0.3s;"></div></div></div>';}).join('');
+}
+
+// ── DONATION GOAL ──────────────────────────────
+function openDonationGoal() { openFeat('s-donation-goal'); }
+function setDG() {
+  var ti = document.getElementById('dg-ti') ? document.getElementById('dg-ti').value.trim() : '';
+  var ai = parseInt(document.getElementById('dg-ai') ? document.getElementById('dg-ai').value : '0')||0;
+  if (!ti||ai<100) { showToast('Title aur min 100 coins dein!'); return; }
+  var t=document.getElementById('dg-t'); if(t) t.textContent=ti;
+  var x=document.getElementById('dg-x'); if(x) x.textContent=ai.toLocaleString()+' 🪙';
+  var c=document.getElementById('dg-c'); if(c) c.textContent='0 🪙';
+  var b=document.getElementById('dg-bar'); if(b) b.style.width='0%';
+  showToast('🎯 Donation goal set!');
+}
+
+// ── PHOTO POST ──────────────────────────────
+var _pp = [];
+function openPhotoPost() { _pp=[]; openFeat('s-photo-post'); renderPP(); }
+function handlePP(inp) { Array.from(inp.files||[]).forEach(function(f){var r=new FileReader();r.onload=function(e){_pp.push(e.target.result);renderPP();};r.readAsDataURL(f);}); }
+function renderPP() {
+  var el = document.getElementById('pp-prev'); if (!el) return;
+  el.innerHTML = _pp.map(function(s,i){return '<div style="position:relative;flex-shrink:0;"><img src="'+s+'" style="width:80px;height:80px;object-fit:cover;border-radius:12px;border:2px solid var(--accent);"><button onclick="rmPP('+i+')" style="position:absolute;top:-6px;right:-6px;background:#f87171;border:none;border-radius:50%;width:20px;height:20px;color:#fff;cursor:pointer;font-size:11px;">✕</button></div>';}).join('') +
+    '<div onclick="document.getElementById('pp-finp').click()" style="width:80px;height:80px;background:var(--bg3,#141f1a);border-radius:12px;border:2px dashed var(--bdr);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><i class="fas fa-plus" style="color:var(--d2);font-size:24px;"></i></div>';
+}
+function rmPP(i) { _pp.splice(i,1); renderPP(); }
+function doPP() { if(!_pp.length){showToast('Koi photo select nahi!');return;} showToast('📸 '+_pp.length+' photos post ho gaye! 🎉'); closeFeat('s-photo-post'); }
+
+// ── CLOSE FRIENDS ──────────────────────────────
+function openCloseFriends() {
+  var sh=document.getElementById('cf-sheet'); if(!sh) return;
+  var el=document.getElementById('cf-contacts'); if(el){
+    var c=[{n:'Ali Raza',av:'👨'},{n:'Sara Bibi',av:'👩'},{n:'Hamza Khan',av:'🧑'}];
+    var sv=JSON.parse(localStorage.getItem('hm_cf')||'[]');
+    el.innerHTML=c.map(function(x){return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bdr);"><div style="width:42px;height:42px;border-radius:50%;background:var(--accent)20;display:flex;align-items:center;justify-content:center;font-size:22px;">'+x.av+'</div><div style="flex:1;color:var(--t1);font-weight:600;">'+x.n+'</div><label class="tog"><input type="checkbox" class="cf-chk" data-n="'+x.n+'" '+(sv.indexOf(x.n)>=0?'checked':'')+' ><span class="tog-s"></span></label></div>';}).join('');
+  }
+  sh.style.display='block';
+}
+function saveCF() {
+  var s=Array.from(document.querySelectorAll('.cf-chk:checked')).map(function(c){return c.dataset.n;});
+  localStorage.setItem('hm_cf',JSON.stringify(s));
+  document.getElementById('cf-sheet').style.display='none';
+  showToast('💚 '+s.length+' Close Friends save!');
+}
+
+// ── AGE VERIFY ──────────────────────────────
+function doAgeVerify() {
+  var d=document.getElementById('age-dob')?document.getElementById('age-dob').value:'';
+  if(!d){showToast('Date of birth dein!');return;}
+  var a=Math.floor((Date.now()-new Date(d))/(365.25*24*3600*1000));
+  if(a<13){showToast('❌ Hamara 13+ ke liye hai!');return;}
+  localStorage.setItem('hm_age_ok','1'); showToast('✅ Age verify! ('+a+' saal)');
+}
+function openDataUsage(){ openFeat('s-app-info'); }
+function openAccountRecovery(){ showToast('📱 OTP bheji ja rahi hai...'); }
+
+// ── VIDEO DOWNLOAD ──────────────────────────────
+function downloadCurrentVideo(){showToast('📥 Video download...');setTimeout(function(){showToast('✅ Video save ho gayi!');},1500);}
+
+console.log('✅ Hamara v11 — WhatsApp Chat + All Features ACTIVE! 🇵🇰🔥');
+console.log('🪙 Coins: SIRF purchase + gift_received. Free = BLOCKED!');
+</script>
+
+</body></html>`;
   downloadFile(exportChatName + '_chat.html', htmlContent, 'text/html');
   showToast('🌐 Chat .html mein export ho gayi!');
 }
@@ -11674,6 +12152,408 @@ console.log('🔴 Demo Live System Ready! Camera + Gifts + Comments sab kaam kar
 console.log('✅ All missing features loaded! Hamara 100% ready! 🇵🇰🔥');
 
 console.log('🌍 Hamara FINAL — Sab features + Performance ready!');
+</script>
+
+
+<!-- ══════════ HAMARA v11 — WHATSAPP CHAT + FEATURES ══════════ -->
+<style>
+/* WhatsApp Chat Screen */
+#wa-screen {
+  position:fixed !important;
+  inset:0 !important;
+  max-width:480px !important;
+  left:50% !important;
+  transform:translateX(-50%) !important;
+  background:var(--bg,#080d0b) !important;
+  z-index:600 !important;
+  display:none;
+  flex-direction:column;
+}
+#wa-screen.open { display:flex !important; }
+.wa-out { background:#064e3b; color:#fff; border-radius:16px 4px 16px 16px; padding:8px 12px; max-width:75%; align-self:flex-end; margin:2px 12px; font-size:14px; line-height:1.5; word-break:break-word; }
+.wa-in  { background:var(--bg3,#141f1a); color:var(--t1,#fff); border-radius:4px 16px 16px 16px; padding:8px 12px; max-width:75%; align-self:flex-start; margin:2px 12px; font-size:14px; line-height:1.5; word-break:break-word; }
+.wa-t   { font-size:10px; opacity:0.55; margin-top:3px; text-align:right; }
+.wa-tk  { color:#34d399; }
+.feat-panel { position:fixed; inset:0; z-index:400; background:var(--bg,#080d0b); display:flex; flex-direction:column; transform:translateX(100%); transition:transform .3s cubic-bezier(.25,.46,.45,.94); max-width:480px; width:100%; left:50%; margin-left:-240px; }
+@media(max-width:480px){ .feat-panel{ left:0; margin-left:0; } }
+.feat-panel.open { transform:translateX(0); }
+</style>
+
+<!-- WHATSAPP CHAT SCREEN -->
+<div id="wa-screen">
+  <div style="background:var(--bg2,#0e1612);padding:10px 12px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bdr,#1a2820);flex-shrink:0;">
+    <button onclick="closeWA()" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px 10px 6px 4px;"><i class="fas fa-arrow-left" style="font-size:18px;"></i></button>
+    <div id="wa-av" style="width:40px;height:40px;border-radius:50%;background:var(--accent,#10b981);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0;">?</div>
+    <div style="flex:1;">
+      <div id="wa-name" style="font-weight:700;color:var(--t1,#fff);font-size:15px;">Chat</div>
+      <div id="wa-status" style="font-size:12px;color:#34d399;">Online</div>
+    </div>
+    <button onclick="try{startVoiceCall();}catch(e){showToast('Voice call!');}" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px;"><i class="fas fa-phone" style="font-size:17px;"></i></button>
+    <button onclick="try{startVideoCall();}catch(e){showToast('Video call!');}" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px;"><i class="fas fa-video" style="font-size:17px;"></i></button>
+    <button onclick="showToast('Chat options!')" style="background:none;border:none;color:var(--t1,#fff);cursor:pointer;padding:6px;"><i class="fas fa-ellipsis-v" style="font-size:17px;"></i></button>
+  </div>
+  <div id="wa-msgs" style="flex:1;overflow-y:auto;padding:8px 0;display:flex;flex-direction:column;gap:2px;"></div>
+  <div id="wa-typing-bar" style="display:none;padding:3px 16px;font-size:12px;color:#34d399;font-style:italic;flex-shrink:0;">typing...</div>
+  <div style="padding:8px 10px;background:var(--bg2,#0e1612);border-top:1px solid var(--bdr,#1a2820);display:flex;align-items:center;gap:8px;flex-shrink:0;">
+    <button onclick="openAttachSheet()" style="background:none;border:none;color:var(--d2,#6b7280);cursor:pointer;font-size:18px;padding:4px;"><i class="fas fa-paperclip"></i></button>
+    <input id="wa-inp" type="text" placeholder="Message..." style="flex:1;padding:10px 14px;border-radius:22px;border:none;background:var(--bg3,#141f1a);color:var(--t1,#fff);font-size:15px;font-family:Outfit,sans-serif;outline:none;" onkeydown="if(event.key==='Enter')sendWA()">
+    <button onclick="sendWA()" style="width:44px;height:44px;border-radius:50%;background:var(--accent,#10b981);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<!-- NEW SCREENS -->
+<div class="feat-panel" id="s-saved-messages">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-saved-messages')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">🔖 Saved Messages</span></div>
+<div id="notes-list" style="flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;"></div>
+<div style="padding:10px;border-top:1px solid var(--bdr);display:flex;gap:8px;">
+<input id="note-inp" type="text" placeholder="Note likhein..." style="flex:1;padding:10px 14px;border-radius:22px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);" onkeydown="if(event.key==='Enter')saveNote()">
+<button onclick="saveNote()" style="background:var(--accent);border:none;border-radius:50%;width:42px;height:42px;color:#fff;cursor:pointer;font-size:16px;"><i class="fas fa-bookmark"></i></button>
+</div>
+</div>
+
+<div class="feat-panel" id="s-channels">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-channels')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">📢 Channels</span></div>
+<div style="padding:12px;overflow-y:auto;flex:1;"><div id="ch-list"></div></div>
+</div>
+
+<div class="feat-panel" id="s-friend-suggest">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-friend-suggest')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">👥 Suggested Friends</span></div>
+<div style="padding:12px;overflow-y:auto;flex:1;"><div id="fs-list"></div></div>
+</div>
+
+<div class="feat-panel" id="s-app-info">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-app-info')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">ℹ️ App Info</span></div>
+<div style="padding:20px;overflow-y:auto;flex:1;">
+<div style="text-align:center;padding:30px;background:var(--bg3,#141f1a);border-radius:16px;margin-bottom:16px;">
+<div style="font-size:40px;">🇵🇰</div>
+<div style="font-size:22px;font-weight:800;color:var(--t1);margin-top:10px;">Hamara</div>
+<div style="color:var(--accent);font-weight:700;margin-top:4px;">Version 11.0 FINAL</div>
+<div style="font-size:12px;color:var(--d2);margin-top:6px;">Made with ❤️ for Pakistan</div>
+</div>
+<div style="background:var(--bg3,#141f1a);border-radius:12px;padding:16px;">
+<div style="font-weight:700;color:var(--t1);margin-bottom:10px;">🔞 Age Verify</div>
+<input type="date" id="age-dob" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg,#080d0b);color:var(--t1);box-sizing:border-box;margin-bottom:10px;">
+<button onclick="doAgeVerify()" style="width:100%;padding:11px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;">✅ Verify Karein</button>
+</div>
+</div>
+</div>
+
+<div class="feat-panel" id="s-search">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-search')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">🔍 Search</span></div>
+<div style="padding:12px;overflow-y:auto;flex:1;">
+<div style="position:relative;margin-bottom:14px;">
+<input id="srch-inp" type="text" placeholder="Users, videos, hashtags..." style="width:100%;padding:11px 11px 11px 40px;border-radius:12px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);font-size:15px;box-sizing:border-box;" oninput="doSearch(this.value)">
+<i class="fas fa-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--d2);"></i>
+</div>
+<div id="srch-res"></div>
+<div style="font-size:13px;font-weight:700;color:var(--d2);margin-bottom:10px;">🔥 Trending</div>
+<div id="srch-trend"></div>
+</div>
+</div>
+
+<div class="feat-panel" id="s-live-poll">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-live-poll')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">📊 Live Poll</span></div>
+<div style="padding:16px;overflow-y:auto;flex:1;">
+<input id="lp-q" type="text" placeholder="Poll question..." style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:10px;box-sizing:border-box;">
+<div id="lp-opts"><input class="lp-opt" type="text" placeholder="Option A" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:8px;box-sizing:border-box;"><input class="lp-opt" type="text" placeholder="Option B" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:8px;box-sizing:border-box;"></div>
+<button onclick="addLPO()" style="color:var(--accent);background:none;border:none;cursor:pointer;font-size:14px;margin-bottom:14px;padding:0;">+ Option Add Karein</button>
+<button onclick="goLP()" style="width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:16px;">🚀 Poll Start Karein</button>
+<div id="lp-res" style="margin-top:16px;"></div>
+</div>
+</div>
+
+<div class="feat-panel" id="s-photo-post">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-photo-post')"><i class="fas fa-times"></i></button><span class="topbar-title">📸 Photo Post</span><button onclick="doPP()" style="background:var(--accent);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-weight:700;cursor:pointer;">Post</button></div>
+<div style="padding:14px;overflow-y:auto;flex:1;">
+<div id="pp-prev" style="display:flex;gap:8px;overflow-x:auto;margin-bottom:12px;min-height:90px;align-items:center;padding-bottom:4px;">
+<div onclick="document.getElementById('pp-finp').click()" style="width:80px;height:80px;background:var(--bg3,#141f1a);border-radius:12px;border:2px dashed var(--bdr);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><i class="fas fa-plus" style="color:var(--d2);font-size:24px;"></i></div>
+</div>
+<textarea id="pp-cap" placeholder="Caption likhein..." rows="3" style="width:100%;padding:12px;border-radius:12px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);resize:none;box-sizing:border-box;font-family:Outfit,sans-serif;margin-bottom:12px;font-size:15px;"></textarea>
+<div style="background:var(--bg3,#141f1a);border-radius:12px;padding:14px;">
+<div style="font-weight:700;color:var(--t1);margin-bottom:8px;">📅 Post Later</div>
+<input type="datetime-local" id="pp-sched" style="width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg,#080d0b);color:var(--t1);box-sizing:border-box;">
+</div>
+</div>
+<input type="file" id="pp-finp" accept="image/*" multiple style="display:none;" onchange="handlePP(this)">
+</div>
+
+<div class="feat-panel" id="s-donation-goal">
+<div class="topbar"><button class="iBtn" onclick="closeFeat('s-donation-goal')"><i class="fas fa-arrow-left"></i></button><span class="topbar-title">🎯 Donation Goal</span></div>
+<div style="padding:16px;overflow-y:auto;flex:1;">
+<div style="background:var(--bg3,#141f1a);border-radius:16px;padding:20px;margin-bottom:16px;">
+<div id="dg-t" style="font-size:17px;font-weight:800;color:var(--t1);margin-bottom:8px;">Koi goal nahi abhi</div>
+<div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span id="dg-c" style="color:var(--accent);font-weight:700;">0 🪙</span><span style="color:var(--d2);">of <span id="dg-x">0 🪙</span></span></div>
+<div style="height:10px;background:var(--bdr);border-radius:5px;overflow:hidden;"><div id="dg-bar" style="height:100%;background:var(--accent);width:0%;border-radius:5px;transition:width 0.5s;"></div></div>
+</div>
+<input id="dg-ti" type="text" placeholder="Goal naam..." style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:10px;box-sizing:border-box;">
+<input id="dg-ai" type="number" placeholder="Target coins (e.g. 5000)..." style="width:100%;padding:12px;border-radius:10px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:14px;box-sizing:border-box;">
+<button onclick="setDG()" style="width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;">🎯 Goal Set Karein</button>
+</div>
+</div>
+
+<!-- CLOSE FRIENDS SHEET -->
+<div id="cf-sheet" style="display:none;position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:auto;background:var(--bg2,#0e1612);border-radius:20px 20px 0 0;padding:20px;z-index:9998;max-height:70vh;overflow-y:auto;box-shadow:0 -4px 30px #0005;">
+<div style="font-weight:700;color:var(--t1);margin-bottom:4px;font-size:16px;">💚 Close Friends</div>
+<div style="font-size:13px;color:var(--d2);margin-bottom:14px;">Story sirf inhe dikhegi</div>
+<div id="cf-contacts"></div>
+<button onclick="saveCF()" style="width:100%;margin-top:14px;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:15px;">✅ Save</button>
+<button onclick="document.getElementById('cf-sheet').style.display='none'" style="width:100%;margin-top:8px;padding:12px;background:var(--bg3,#141f1a);border:1.5px solid var(--bdr);border-radius:12px;color:var(--t1);cursor:pointer;">Cancel</button>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// HAMARA v11 — ALL FEATURES & WHATSAPP CHAT
+// ══════════════════════════════════════════════
+
+// ── WHATSAPP CHAT ──────────────────────────────
+var _WA = null;
+
+function openWAChat(id) {
+  var chat = APP && APP.chats ? APP.chats.find(function(c){return c.id===id;}) : null;
+  _WA = chat || {id:id, n:'Chat', in:'?', av:'', online:false};
+  var sc = document.getElementById('wa-screen');
+  if (!sc) return;
+  sc.classList.add('open');
+  var av = document.getElementById('wa-av');
+  var nm = document.getElementById('wa-name');
+  var st = document.getElementById('wa-status');
+  if (av) { av.textContent = _WA.in || '?'; }
+  if (nm) { nm.textContent = _WA.n + (_WA.verified ? ' ✅' : ''); }
+  if (st) { st.textContent = _WA.online ? 'Online' : 'Last seen recently'; st.style.color = _WA.online ? '#34d399' : 'var(--d2)'; }
+  renderWAMsgs(id);
+  if (_WA.unread) { _WA.unread = 0; try{renderChatList();}catch(e){} }
+}
+
+function closeWA() {
+  var sc = document.getElementById('wa-screen');
+  if (sc) sc.classList.remove('open');
+  _WA = null;
+}
+
+function renderWAMsgs(cid) {
+  var area = document.getElementById('wa-msgs');
+  if (!area) return;
+  var msgs = (APP && APP.msgs && APP.msgs[cid]) ? APP.msgs[cid] : [
+    {f:'t', m:'Assalam o Alaikum! 👋', t:'10:00 AM'},
+    {f:'m', m:'Walaikum Assalam! Kya haal hai? 😊', t:'10:01 AM'},
+    {f:'t', m:'Alhamdulillah! Aap sunao?', t:'10:02 AM'},
+    {f:'m', m:'Main bhi theek hoon, shukriya!', t:'10:03 AM'},
+    {f:'t', m:'Koi kaam tha? Batao 😊', t:'10:04 AM'},
+  ];
+  if (!msgs.length) {
+    area.innerHTML = '<div style="text-align:center;padding:60px 20px;color:var(--d2);"><div style="font-size:48px;margin-bottom:12px;">💬</div><div>Koi message nahi abhi tak<br>Salaam bhejo! 👋</div></div>';
+    return;
+  }
+  area.innerHTML = msgs.map(function(m) {
+    var isMe = m.f === 'm';
+    return '<div style="display:flex;flex-direction:column;align-items:' + (isMe?'flex-end':'flex-start') + ';margin:1px 0;">' +
+      '<div class="' + (isMe?'wa-out':'wa-in') + '">' +
+        '<div>' + escHtml(m.m||m.text||'') + '</div>' +
+        '<div class="wa-t">' + (m.t||m.time||'') + (isMe?' <span class="wa-tk">✓✓</span>':'') + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+  area.scrollTop = area.scrollHeight;
+}
+
+function sendWA() {
+  var inp = document.getElementById('wa-inp');
+  var txt = inp ? inp.value.trim() : '';
+  if (!txt || !_WA) { if(!_WA){showToast('Chat open karein pehle!');} return; }
+  if (!APP.msgs) APP.msgs = {};
+  if (!APP.msgs[_WA.id]) APP.msgs[_WA.id] = [];
+  var now = new Date();
+  var t = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0') + ' ' + (now.getHours()<12?'AM':'PM');
+  APP.msgs[_WA.id].push({f:'m', m:txt, t:t});
+  if (inp) inp.value = '';
+  renderWAMsgs(_WA.id);
+  try { localStorage.setItem('hm_msgs', JSON.stringify(APP.msgs)); } catch(e) {}
+  var tb = document.getElementById('wa-typing-bar');
+  if (tb) tb.style.display = 'block';
+  var cid = _WA.id;
+  setTimeout(function() {
+    if (tb) tb.style.display = 'none';
+    var replies = ['Haan bilkul! 😊','Theek hai!','JazakAllah 🤲','Okay sure!','Alhamdulillah! 🌙','Haan zaroor 👍','Kal baat karte hain','❤️ شکریہ','Thori der mein bataata hoon'];
+    if (APP.msgs[cid] && _WA && _WA.id === cid) {
+      APP.msgs[cid].push({f:'t', m:replies[Math.floor(Math.random()*replies.length)], t:t});
+      renderWAMsgs(cid);
+    }
+  }, 1200 + Math.random()*800);
+}
+
+// Override original openChat
+window.openChat = openWAChat;
+
+// Patch chat list every 300ms to use openWAChat
+setInterval(function() {
+  document.querySelectorAll('[onclick*="openChat("]').forEach(function(el) {
+    var oc = el.getAttribute('onclick');
+    if (oc && oc.indexOf('openWAChat') < 0) {
+      el.setAttribute('onclick', oc.split('openChat(').join('openWAChat('));
+    }
+  });
+}, 300);
+
+// ── SAVED MESSAGES ──────────────────────────────
+function openSavedMessages() { openFeat('s-saved-messages'); renderNotes(); }
+function renderNotes() {
+  var el = document.getElementById('notes-list');
+  if (!el) return;
+  var n = JSON.parse(localStorage.getItem('hm_notes')||'[]');
+  el.innerHTML = n.length ? n.map(function(x,i){
+    return '<div style="background:var(--bg3,#141f1a);border-radius:12px;padding:12px;position:relative;">' +
+      '<div style="color:var(--t1);font-size:14px;padding-right:28px;">' + escHtml(x.t) + '</div>' +
+      '<div style="font-size:11px;color:var(--d2);margin-top:6px;">' + new Date(x.d).toLocaleString() + '</div>' +
+      '<button onclick="delNote('+i+')" style="position:absolute;top:10px;right:10px;background:none;border:none;color:var(--d2);cursor:pointer;font-size:14px;">🗑️</button>' +
+    '</div>';
+  }).join('') : '<div style="text-align:center;padding:50px 20px;color:var(--d2);"><div style="font-size:48px;margin-bottom:12px;">🔖</div><div>Koi note nahi<br>Kuch likhein!</div></div>';
+}
+function saveNote() {
+  var inp = document.getElementById('note-inp');
+  if (!inp || !inp.value.trim()) return;
+  var n = JSON.parse(localStorage.getItem('hm_notes')||'[]');
+  n.unshift({t:inp.value.trim(), d:Date.now()});
+  localStorage.setItem('hm_notes', JSON.stringify(n));
+  inp.value = ''; renderNotes(); showToast('🔖 Note save!');
+}
+function delNote(i) {
+  var n = JSON.parse(localStorage.getItem('hm_notes')||'[]');
+  n.splice(i,1); localStorage.setItem('hm_notes',JSON.stringify(n)); renderNotes();
+}
+
+// ── CHANNELS ──────────────────────────────
+function openChannels() { openFeat('s-channels'); renderCH(); }
+function renderCH() {
+  var el = document.getElementById('ch-list'); if (!el) return;
+  var ch = [{n:'Hamara Official',em:'🇵🇰',s:'1.2M',v:true},{n:'Cricket Updates',em:'🏏',s:'850K',v:false},{n:'Pak News',em:'📰',s:'500K',v:true}];
+  el.innerHTML = ch.map(function(c) {
+    return '<div style="background:var(--bg3,#141f1a);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;">' +
+      '<div style="width:50px;height:50px;border-radius:50%;background:var(--accent,#10b981)20;display:flex;align-items:center;justify-content:center;font-size:26px;">' + c.em + '</div>' +
+      '<div style="flex:1;"><div style="font-weight:700;color:var(--t1);">' + c.n + (c.v?' ✅':'') + '</div><div style="font-size:12px;color:var(--d2);">' + c.s + ' subscribers</div></div>' +
+      '<button onclick="this.textContent='✅';this.style.background='#10b981'" style="padding:7px 14px;background:var(--accent,#10b981);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;">Subscribe</button>' +
+    '</div>';
+  }).join('');
+}
+
+// ── FRIENDS SUGGESTION ──────────────────────────────
+function openFriendSuggestions() { openFeat('s-friend-suggest'); renderFS(); }
+function renderFS() {
+  var el = document.getElementById('fs-list'); if (!el) return;
+  var f = [{n:'Bilal Ahmed',u:'@bilal_pk',m:5,av:'🧑'},{n:'Fatima Zahra',u:'@fatima_z',m:3,av:'👩'},{n:'Usman Malik',u:'@usman_m',m:8,av:'👨'},{n:'Hira Khan',u:'@hira_k',m:2,av:'👧'}];
+  el.innerHTML = f.map(function(p) {
+    return '<div style="background:var(--bg3,#141f1a);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:10px;">' +
+      '<div style="width:48px;height:48px;border-radius:50%;background:var(--accent,#10b981)20;display:flex;align-items:center;justify-content:center;font-size:26px;">' + p.av + '</div>' +
+      '<div style="flex:1;"><div style="font-weight:700;color:var(--t1);">' + p.n + '</div><div style="font-size:12px;color:var(--d2);">' + p.u + ' • ' + p.m + ' mutual</div></div>' +
+      '<button onclick="this.textContent='✅ Following';this.style.background='#10b981'" style="padding:7px 14px;background:var(--accent,#10b981);color:#fff;border:none;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;">Follow</button>' +
+    '</div>';
+  }).join('');
+}
+
+// ── SEARCH ──────────────────────────────
+function openSearchScreen() { openFeat('s-search'); loadTrend(); }
+function doSearch(q) {
+  var res = document.getElementById('srch-res'); if (!res) return;
+  if (!q || q.length < 2) { res.innerHTML = ''; return; }
+  var d = [{n:'Ahmed Khan',s:'@ahmed_pk',ic:'👨'},{n:'#'+q,s:'2.3K posts',ic:'#️⃣'},{n:q+' video',s:'12K views',ic:'🎬'}];
+  res.innerHTML = d.map(function(x) {
+    return '<div onclick="showToast(''+x.n+'!')" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bdr);cursor:pointer;">' +
+      '<div style="width:44px;height:44px;border-radius:50%;background:var(--bg3,#141f1a);display:flex;align-items:center;justify-content:center;font-size:22px;">' + x.ic + '</div>' +
+      '<div><div style="font-weight:700;color:var(--t1);">' + x.n + '</div><div style="font-size:12px;color:var(--d2);">' + x.s + '</div></div>' +
+    '</div>';
+  }).join('');
+}
+function loadTrend() {
+  var el = document.getElementById('srch-trend'); if (!el) return;
+  ['#Pakistan','Ahmed Shah','Karachi Vlog','Cricket 2025','Eid Special'].forEach(function(t,i) {
+    el.innerHTML += '<div onclick="document.getElementById('srch-inp').value=''+t+'';doSearch(''+t+'')" style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--bdr);cursor:pointer;"><span style="color:var(--accent);font-weight:700;width:22px;">'+(i+1)+'</span><span style="color:var(--t1);">'+t+'</span><i class="fas fa-arrow-trend-up" style="margin-left:auto;color:var(--d2);font-size:11px;"></i></div>';
+  });
+}
+
+// ── LIVE POLL ──────────────────────────────
+var _lp = null, _lpInt = null;
+function openLivePollScreen() { openFeat('s-live-poll'); }
+function addLPO() {
+  var w = document.getElementById('lp-opts'); if (!w) return;
+  if (w.querySelectorAll('.lp-opt').length >= 6) { showToast('Max 6 options!'); return; }
+  var i = document.createElement('input'); i.className='lp-opt'; i.type='text';
+  i.placeholder='Option '+String.fromCharCode(65+w.querySelectorAll('.lp-opt').length);
+  i.style.cssText='width:100%;padding:10px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg3,#141f1a);color:var(--t1);margin-bottom:8px;box-sizing:border-box;';
+  w.appendChild(i);
+}
+function goLP() {
+  var q = document.getElementById('lp-q') ? document.getElementById('lp-q').value.trim() : '';
+  var opts = Array.from(document.querySelectorAll('.lp-opt')).map(function(x){return x.value.trim();}).filter(Boolean);
+  if (!q || opts.length < 2) { showToast('Question aur min 2 options dein!'); return; }
+  _lp = {q:q, opts:opts, votes:opts.map(function(){return 0;})};
+  if (_lpInt) clearInterval(_lpInt);
+  _lpInt = setInterval(function(){if(!_lp)return;_lp.votes[Math.floor(Math.random()*_lp.votes.length)]++;showLP();},800);
+  showLP(); showToast('📊 Poll live!');
+}
+function showLP() {
+  var el = document.getElementById('lp-res'); if (!el||!_lp) return;
+  var tot = _lp.votes.reduce(function(a,b){return a+b;},0)||1;
+  el.innerHTML = '<div style="font-weight:700;color:var(--t1);margin-bottom:12px;">'+escHtml(_lp.q)+'</div>' +
+    _lp.opts.map(function(o,i){var p=Math.round(_lp.votes[i]/tot*100); return '<div style="margin-bottom:10px;"><div style="display:flex;justify-content:space-between;margin-bottom:5px;"><span style="color:var(--t1);">'+escHtml(o)+'</span><span style="color:var(--accent);font-weight:700;">'+p+'%</span></div><div style="height:8px;background:var(--bdr);border-radius:4px;overflow:hidden;"><div style="height:100%;width:'+p+'%;background:var(--accent);border-radius:4px;transition:width 0.3s;"></div></div></div>';}).join('');
+}
+
+// ── DONATION GOAL ──────────────────────────────
+function openDonationGoal() { openFeat('s-donation-goal'); }
+function setDG() {
+  var ti = document.getElementById('dg-ti') ? document.getElementById('dg-ti').value.trim() : '';
+  var ai = parseInt(document.getElementById('dg-ai') ? document.getElementById('dg-ai').value : '0')||0;
+  if (!ti||ai<100) { showToast('Title aur min 100 coins dein!'); return; }
+  var t=document.getElementById('dg-t'); if(t) t.textContent=ti;
+  var x=document.getElementById('dg-x'); if(x) x.textContent=ai.toLocaleString()+' 🪙';
+  var c=document.getElementById('dg-c'); if(c) c.textContent='0 🪙';
+  var b=document.getElementById('dg-bar'); if(b) b.style.width='0%';
+  showToast('🎯 Donation goal set!');
+}
+
+// ── PHOTO POST ──────────────────────────────
+var _pp = [];
+function openPhotoPost() { _pp=[]; openFeat('s-photo-post'); renderPP(); }
+function handlePP(inp) { Array.from(inp.files||[]).forEach(function(f){var r=new FileReader();r.onload=function(e){_pp.push(e.target.result);renderPP();};r.readAsDataURL(f);}); }
+function renderPP() {
+  var el = document.getElementById('pp-prev'); if (!el) return;
+  el.innerHTML = _pp.map(function(s,i){return '<div style="position:relative;flex-shrink:0;"><img src="'+s+'" style="width:80px;height:80px;object-fit:cover;border-radius:12px;border:2px solid var(--accent);"><button onclick="rmPP('+i+')" style="position:absolute;top:-6px;right:-6px;background:#f87171;border:none;border-radius:50%;width:20px;height:20px;color:#fff;cursor:pointer;font-size:11px;">✕</button></div>';}).join('') +
+    '<div onclick="document.getElementById('pp-finp').click()" style="width:80px;height:80px;background:var(--bg3,#141f1a);border-radius:12px;border:2px dashed var(--bdr);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><i class="fas fa-plus" style="color:var(--d2);font-size:24px;"></i></div>';
+}
+function rmPP(i) { _pp.splice(i,1); renderPP(); }
+function doPP() { if(!_pp.length){showToast('Koi photo select nahi!');return;} showToast('📸 '+_pp.length+' photos post ho gaye! 🎉'); closeFeat('s-photo-post'); }
+
+// ── CLOSE FRIENDS ──────────────────────────────
+function openCloseFriends() {
+  var sh=document.getElementById('cf-sheet'); if(!sh) return;
+  var el=document.getElementById('cf-contacts'); if(el){
+    var c=[{n:'Ali Raza',av:'👨'},{n:'Sara Bibi',av:'👩'},{n:'Hamza Khan',av:'🧑'}];
+    var sv=JSON.parse(localStorage.getItem('hm_cf')||'[]');
+    el.innerHTML=c.map(function(x){return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bdr);"><div style="width:42px;height:42px;border-radius:50%;background:var(--accent)20;display:flex;align-items:center;justify-content:center;font-size:22px;">'+x.av+'</div><div style="flex:1;color:var(--t1);font-weight:600;">'+x.n+'</div><label class="tog"><input type="checkbox" class="cf-chk" data-n="'+x.n+'" '+(sv.indexOf(x.n)>=0?'checked':'')+' ><span class="tog-s"></span></label></div>';}).join('');
+  }
+  sh.style.display='block';
+}
+function saveCF() {
+  var s=Array.from(document.querySelectorAll('.cf-chk:checked')).map(function(c){return c.dataset.n;});
+  localStorage.setItem('hm_cf',JSON.stringify(s));
+  document.getElementById('cf-sheet').style.display='none';
+  showToast('💚 '+s.length+' Close Friends save!');
+}
+
+// ── AGE VERIFY ──────────────────────────────
+function doAgeVerify() {
+  var d=document.getElementById('age-dob')?document.getElementById('age-dob').value:'';
+  if(!d){showToast('Date of birth dein!');return;}
+  var a=Math.floor((Date.now()-new Date(d))/(365.25*24*3600*1000));
+  if(a<13){showToast('❌ Hamara 13+ ke liye hai!');return;}
+  localStorage.setItem('hm_age_ok','1'); showToast('✅ Age verify! ('+a+' saal)');
+}
+function openDataUsage(){ openFeat('s-app-info'); }
+function openAccountRecovery(){ showToast('📱 OTP bheji ja rahi hai...'); }
+
+// ── VIDEO DOWNLOAD ──────────────────────────────
+function downloadCurrentVideo(){showToast('📥 Video download...');setTimeout(function(){showToast('✅ Video save ho gayi!');},1500);}
+
+console.log('✅ Hamara v11 — WhatsApp Chat + All Features ACTIVE! 🇵🇰🔥');
+console.log('🪙 Coins: SIRF purchase + gift_received. Free = BLOCKED!');
 </script>
 
 </body>
