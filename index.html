@@ -748,6 +748,69 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 
 @keyframes slideUp{from{transform:translateX(-50%) translateY(20px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
 
+
+/* ====== CHAT FULL SCREEN FIX ====== */
+#s-chat {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  transform: none !important;
+  z-index: 9999 !important;
+  background: var(--bg) !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+#s-chat .msgs-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+#s-chat .cw-input {
+  flex-shrink: 0;
+}
+#s-chat .topbar {
+  flex-shrink: 0;
+}
+/* WhatsApp-style attach icons */
+.attach-icon {
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 50% !important;
+}
+/* Fix attach sheet z-index */
+.attach-sheet {
+  z-index: 10000 !important;
+}
+/* Fix overlay z-index */
+#overlay {
+  z-index: 9998 !important;
+}
+/* TikTok upload button */
+#tiktok-upload-btn {
+  position: absolute;
+  bottom: 90px;
+  right: 16px;
+  z-index: 20;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff0050, #ff6900);
+  border: 3px solid #fff;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(255,0,80,0.4);
+}
 </style>
 
   <!-- ═══ FIREBASE SDK ═══ -->
@@ -1065,7 +1128,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 </div><!-- /s-main -->
 
 <!-- ══════════ CHAT WINDOW ══════════ -->
-<div id="s-chat" style="position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;max-width:480px;left:50%;transform:translateX(-50%);z-index:100;">
+<div id="s-chat" style="position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);display:none;flex-direction:column;z-index:9999;overflow:hidden;">
   <div style="background:var(--bg);" id="chat-wallpaper-bg" style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
   <div class="topbar" id="chat-topbar">
     <button class="iBtn" onclick="closeChat()"><i class="fas fa-arrow-left"></i></button>
@@ -1942,21 +2005,7 @@ window.saveProfile = async function() {
     showToast('Masla aya: ' + error.message);
   }
 }
-function doLogout(){
-  if(!confirm('Logout karna chahte hain?'))return;
-  showToast('👋 Logout ho raha hai...');
-  try {
-    var _a = window._fbAuth || (typeof firebase !== 'undefined' ? firebase.auth() : null);
-    if(_a) _a.signOut().catch(function(){});
-  } catch(e){}
-  localStorage.removeItem('hm_user_v7');
-  localStorage.removeItem('hamara_accounts_v1');
-  localStorage.removeItem('hamara_active_acc_v1');
-  if(typeof APP !== 'undefined') APP.user = null;
-  if(typeof currentUser !== 'undefined') currentUser = null;
-  goScreen('landing');
-  showToast('✅ Logout ho gaye! 👋');
-}
+/* original_doLogout_removed */
 
 /* ── TOAST ── */
 var toastTimer = null;
@@ -2133,7 +2182,7 @@ function openChat(id){
   $('chat-sub').textContent=chat.city+', '+chat.ctr+(chat.online?' • Online':'');
   var dot=$('chat-online-dot');dot.style.display=chat.online?'block':'none';
   // Show chat screen
-  $('s-chat').style.display='flex';
+  var _sc=$('s-chat');if(_sc){_sc.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);display:flex;flex-direction:column;z-index:9999;overflow:hidden;';}
   if(!APP.msgs[id])APP.msgs[id]=[];
   // Mark read
   APP.msgs[id].forEach(function(m){m.read=true;});
@@ -2149,7 +2198,7 @@ function openChat(id){
   }
   renderChatList();
 }
-function closeChat(){$('s-chat').style.display='none';APP.openChatId=null;clearReply();cancelEdit();}
+function closeChat(){var _sc=$('s-chat');if(_sc)_sc.style.display='none';APP.openChatId=null;if(typeof clearReply==='function')clearReply();if(typeof cancelEdit==='function')cancelEdit();}
 
 /* ── RENDER MESSAGES ── */
 function renderMessages(list){
@@ -12381,24 +12430,7 @@ window.shareContact = async function() {
 };
 
 // Override logout
-window.doLogout = async function() {
-  if (!window.confirm('Logout karna chahte hain?')) return;
-  try {
-    if (currentUser) {
-      await db.collection('users').doc(currentUser.uid).update({
-        online: false, lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-      });
-    }
-    // Unsubscribe all listeners
-    Object.values(_chatListeners).forEach(unsub => { try { unsub(); } catch(_) {} });
-    await auth.signOut();
-    currentUser = null;
-    localStorage.removeItem('hm_user');
-    showToast('👋 Logout ho gaye');
-    goScreen && goScreen('landing');
-  } catch(e) { showToast('❌ Logout error: ' + e.message); }
-};
-
+/* doLogout_removed */
 // ============================================================
 // 🎬 VIDEO TRIM TOOL
 // ============================================================
@@ -12800,36 +12832,7 @@ window.switchTab = function(tab) {
 // ============================================================
 // 🔐 FIXED LOGOUT — Firebase Auth
 // ============================================================
-window.doLogout = async function() {
-  if (!confirm('Is account se logout karna chahte hain?')) return;
-  showToast('👋 Logout ho raha hai...');
-  try {
-    await auth.signOut();
-  } catch(e) {
-    console.warn('Firebase signOut error:', e);
-  }
-  // Clear local session
-  localStorage.removeItem('hm_user_v7');
-  const activeId = getActiveAccountId();
-  const accounts = getSavedAccounts();
-  const remaining = accounts.filter(a => a.uid !== activeId);
-  saveAccounts(remaining);
-  localStorage.removeItem(ACTIVE_ACC_KEY);
-  currentUser = null;
-
-  // If other accounts exist, show switch option
-  if (remaining.length > 0) {
-    const switchNow = confirm(`✅ Logout ho gaye! ${remaining.length} aur account(s) saved hain. Switch karna chahte hain?`);
-    if (switchNow) {
-      goScreen('phone');
-      showToast('📱 Doosre account se login karein');
-      return;
-    }
-  }
-  goScreen('landing');
-  showToast('✅ Logout ho gaye! 👋');
-};
-
+/* doLogout_removed */
 // Save account on successful Firebase login
 auth.onAuthStateChanged(function(user) {
   if (user) {
@@ -13006,6 +13009,74 @@ window.logoutAllAccounts = function() {
 console.log('🎬 TikTok Upload + WhatsApp Fixes Ready!');
 
 console.log('🌍 Hamara v11 COMPLETE — WhatsApp + TikTok All Features Ready!');
+
+
+// ============================================================
+// 🔐 THE ONE TRUE LOGOUT — Works with Firebase Compat SDK
+// ============================================================
+function doLogout() {
+  if (!confirm('Logout karna chahte hain?')) return;
+  showToast('👋 Logout ho raha hai...');
+  
+  // Try all possible auth references
+  var authRef = null;
+  try { authRef = firebase.auth(); } catch(e) {}
+  if (!authRef) try { authRef = window.auth; } catch(e) {}
+  if (!authRef) try { authRef = window._fbAuth; } catch(e) {}
+  
+  var doCleanup = function() {
+    localStorage.clear();
+    if (typeof APP !== 'undefined') { APP.user = null; APP.openChatId = null; }
+    if (typeof currentUser !== 'undefined') { currentUser = null; }
+    setTimeout(function() {
+      goScreen('landing');
+      showToast('✅ Logout ho gaye! 👋');
+    }, 300);
+  };
+  
+  if (authRef && authRef.currentUser) {
+    // Update online status
+    try {
+      var uid = authRef.currentUser.uid;
+      if (typeof firebase !== 'undefined' && firebase.firestore) {
+        firebase.firestore().collection('users').doc(uid).update({
+          online: false,
+          lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(function(){});
+      }
+    } catch(e) {}
+    
+    authRef.signOut().then(doCleanup).catch(function(e) {
+      console.warn('SignOut error:', e);
+      doCleanup();
+    });
+  } else {
+    doCleanup();
+  }
+}
+
+window.doLogout = doLogout;
+
+window.logoutAllAccounts = function() {
+  if (!confirm('Sab accounts se logout karna chahte hain?')) return;
+  try { firebase.auth().signOut().catch(function(){}); } catch(e) {}
+  localStorage.clear();
+  if (typeof APP !== 'undefined') APP.user = null;
+  goScreen('landing');
+  showToast('✅ Sab accounts se logout ho gaye! 👋');
+};
+
+window.addNewAccount = function() {
+  var ok = confirm('Naya account add karne ke liye temporarily sign out hoga. Jari rakhein?');
+  if (!ok) return;
+  try { firebase.auth().signOut().catch(function(){}); } catch(e) {}
+  localStorage.removeItem('hm_user_v7');
+  if (typeof APP !== 'undefined') APP.user = null;
+  setTimeout(function() {
+    goScreen('phone');
+    showToast('📱 Naya account: Number darj karein');
+  }, 500);
+};
 
 </script>
 
