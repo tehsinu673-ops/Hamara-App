@@ -1106,10 +1106,10 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
 
     <!-- LOGOUT BUTTON -->
     <div style="margin:16px;display:flex;flex-direction:column;gap:10px;">
-      <button onclick="doLogout()" style="padding:13px;background:#ef444418;border:1px solid #ef444440;border-radius:var(--r2);color:#f87171;font-size:14.5px;font-weight:700;font-family:Outfit,sans-serif;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;">
+      <button onclick="window.doLogout()" style="padding:13px;background:#ef444418;border:1px solid #ef444440;border-radius:var(--r2);color:#f87171;font-size:14.5px;font-weight:700;font-family:Outfit,sans-serif;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;">
         <i class="fas fa-right-from-bracket"></i> Logout (Is Account se)
       </button>
-      <button onclick="logoutAllAccounts()" style="padding:13px;background:#7f1d1d18;border:1px solid #7f1d1d40;border-radius:var(--r2);color:#fca5a5;font-size:13px;font-weight:700;font-family:Outfit,sans-serif;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;">
+      <button onclick="window.logoutAllAccounts()" style="padding:13px;background:#7f1d1d18;border:1px solid #7f1d1d40;border-radius:var(--r2);color:#fca5a5;font-size:13px;font-weight:700;font-family:Outfit,sans-serif;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;">
         <i class="fas fa-power-off"></i> Sab Accounts se Logout
       </button>
     </div>
@@ -13015,47 +13015,65 @@ console.log('🌍 Hamara v11 COMPLETE — WhatsApp + TikTok All Features Ready!'
 // 🔐 THE ONE TRUE LOGOUT — Works with Firebase Compat SDK
 // ============================================================
 function doLogout() {
-  if (!confirm('Logout karna chahte hain?')) return;
-  showToast('👋 Logout ho raha hai...');
+  var sure = window.confirm('Logout karna chahte hain?');
+  if (!sure) return;
   
-  // Try all possible auth references
-  var authRef = null;
-  try { authRef = firebase.auth(); } catch(e) {}
-  if (!authRef) try { authRef = window.auth; } catch(e) {}
-  if (!authRef) try { authRef = window._fbAuth; } catch(e) {}
+  // Step 1: Clear everything immediately
+  try { localStorage.clear(); } catch(e) {}
+  try { sessionStorage.clear(); } catch(e) {}
   
-  var doCleanup = function() {
-    localStorage.clear();
-    if (typeof APP !== 'undefined') { APP.user = null; APP.openChatId = null; }
-    if (typeof currentUser !== 'undefined') { currentUser = null; }
-    setTimeout(function() {
-      goScreen('landing');
-      showToast('✅ Logout ho gaye! 👋');
-    }, 300);
-  };
+  // Step 2: Reset app state
+  try { if (typeof APP !== 'undefined') { APP.user = null; APP.openChatId = null; } } catch(e) {}
+  try { currentUser = null; } catch(e) {}
   
-  if (authRef && authRef.currentUser) {
-    // Update online status
+  // Step 3: Firebase signout (background)
+  try { firebase.auth().signOut().catch(function(){}); } catch(e) {}
+  try { if (window._fbAuth) window._fbAuth.signOut().catch(function(){}); } catch(e) {}
+  try { if (typeof auth !== 'undefined' && auth) auth.signOut().catch(function(){}); } catch(e) {}
+  
+  // Step 4: Go to landing page
+  showToast('✅ Logout ho gaye! 👋');
+  
+  setTimeout(function() {
+    // Try goScreen first
     try {
-      var uid = authRef.currentUser.uid;
-      if (typeof firebase !== 'undefined' && firebase.firestore) {
-        firebase.firestore().collection('users').doc(uid).update({
-          online: false,
-          lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-        }).catch(function(){});
+      if (typeof goScreen === 'function') {
+        goScreen('landing');
+        return;
       }
     } catch(e) {}
     
-    authRef.signOut().then(doCleanup).catch(function(e) {
-      console.warn('SignOut error:', e);
-      doCleanup();
-    });
-  } else {
-    doCleanup();
-  }
+    // If goScreen fails, reload page
+    window.location.reload();
+  }, 500);
 }
 
 window.doLogout = doLogout;
+
+window.logoutAllAccounts = function() {
+  var sure = window.confirm('Sab accounts se logout karna chahte hain?');
+  if (!sure) return;
+  try { localStorage.clear(); } catch(e) {}
+  try { sessionStorage.clear(); } catch(e) {}
+  try { firebase.auth().signOut().catch(function(){}); } catch(e) {}
+  try { if (typeof APP !== 'undefined') APP.user = null; } catch(e) {}
+  showToast('✅ Sab accounts se logout! 👋');
+  setTimeout(function() {
+    try { goScreen('landing'); } catch(e) { window.location.reload(); }
+  }, 500);
+};
+
+window.addNewAccount = function() {
+  var sure = window.confirm('Naya account add karne ke liye logout hoga. Jari rakhein?');
+  if (!sure) return;
+  try { localStorage.removeItem('hm_user_v7'); } catch(e) {}
+  try { firebase.auth().signOut().catch(function(){}); } catch(e) {}
+  try { if (typeof APP !== 'undefined') APP.user = null; } catch(e) {}
+  showToast('📱 Naya number darj karein...');
+  setTimeout(function() {
+    try { goScreen('phone'); } catch(e) { window.location.reload(); }
+  }, 500);
+};
 
 window.logoutAllAccounts = function() {
   if (!confirm('Sab accounts se logout karna chahte hain?')) return;
