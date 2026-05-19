@@ -1098,7 +1098,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
     <div class="s-row" onclick="openFeat('s-videoquality')"><div class="s-icon" style="background:#7c3aed20;color:#a78bfa;"><i class="fas fa-film"></i></div><div style="flex:1;"><div class="s-title">Video Quality</div><div class="s-sub" id="vq-sub-s">Auto 📡</div></div><i class="fas fa-chevron-right" style="color:var(--d2);"></i></div>
     <div class="s-row" onclick="openFeat('s-nearby')"><div class="s-icon" style="background:#22c55e20;color:#22c55e;"><i class="fas fa-location-dot"></i></div><div style="flex:1;"><div class="s-title">Nearby People</div><div class="s-sub">Aas paas ke log 📍</div></div><i class="fas fa-chevron-right" style="color:var(--d2);"></i></div>
     <div class="s-row" onclick="openFeat('s-qr')"><div class="s-icon" style="background:#10b98120;color:var(--g4);"><i class="fas fa-qrcode"></i></div><div style="flex:1;"><div class="s-title">QR Code</div><div class="s-sub">Profile share 🤳</div></div><i class="fas fa-chevron-right" style="color:var(--d2);"></i></div>
-    <div class="s-row" onclick="showToast('Hamara v10 FINAL 🚀')"><div class="s-icon" style="background:#f59e0b20;color:var(--gold);"><i class="fas fa-star"></i></div><div style="flex:1;"><div class="s-title">App Info</div><div class="s-sub">Hamara v10 FINAL — 40+ Features</div></div><i class="fas fa-chevron-right" style="color:var(--d2);"></i></div>
+    <div class="s-row" onclick="showToast('Hamara v14 FIXED 🚀 — All Features Working!')"><div class="s-icon" style="background:#f59e0b20;color:var(--gold);"><i class="fas fa-star"></i></div><div style="flex:1;"><div class="s-title">App Info</div><div class="s-sub">Hamara v10 FINAL — 40+ Features</div></div><i class="fas fa-chevron-right" style="color:var(--d2);"></i></div>
     <!-- MULTI ACCOUNT SECTION -->
     <div class="s-sec-hdr">👤 Accounts</div>
     <div id="accounts-list-settings" style="background:var(--bg2);"></div>
@@ -1232,6 +1232,51 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
       <textarea id="bc-text" placeholder="Broadcast message..." class="cw-ta" style="flex:1;min-height:40px;" rows="2"></textarea>
     </div>
     <button class="btn-primary" id="bc-send-btn" onclick="sendBroadcast()"><i class="fas fa-bullhorn"></i> Contacts chunein pehle</button>
+  </div>
+</div>
+
+
+<!-- ══════════ LANGUAGE PANEL ══════════ -->
+<div class="feat-panel" id="s-language">
+  <div class="topbar">
+    <button class="iBtn" onclick="closeFeat('s-language')"><i class="fas fa-arrow-left"></i></button>
+    <span class="topbar-title">Language / Zaban</span>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:14px;">
+    <div style="color:var(--d2);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;padding:0 2px;">Select Language / Zaban Chunein</div>
+    
+    <div id="lang-list">
+      <div class="s-row" onclick="setLanguage('urdu','اردو','ur')" style="border-radius:12px;margin-bottom:8px;background:var(--bg2);">
+        <div style="font-size:28px;">🇵🇰</div>
+        <div style="flex:1;"><div class="s-title">اردو</div><div class="s-sub">Urdu — Pakistan</div></div>
+        <div id="lang-check-urdu" style="display:none;color:var(--g4);font-size:18px;"><i class="fas fa-check-circle"></i></div>
+      </div>
+      <div class="s-row" onclick="setLanguage('english','English','en')" style="border-radius:12px;margin-bottom:8px;background:var(--bg2);">
+        <div style="font-size:28px;">🇬🇧</div>
+        <div style="flex:1;"><div class="s-title">English</div><div class="s-sub">English — International</div></div>
+        <div id="lang-check-english" style="color:var(--g4);font-size:18px;"><i class="fas fa-check-circle"></i></div>
+      </div>
+      <div class="s-row" onclick="setLanguage('hindi','हिंदी','hi')" style="border-radius:12px;margin-bottom:8px;background:var(--bg2);">
+        <div style="font-size:28px;">🇮🇳</div>
+        <div style="flex:1;"><div class="s-title">हिंदी</div><div class="s-sub">Hindi — India</div></div>
+        <div id="lang-check-hindi" style="display:none;color:var(--g4);font-size:18px;"><i class="fas fa-check-circle"></i></div>
+      </div>
+      <div class="s-row" onclick="setLanguage('arabic','العربية','ar')" style="border-radius:12px;margin-bottom:8px;background:var(--bg2);">
+        <div style="font-size:28px;">🇸🇦</div>
+        <div style="flex:1;"><div class="s-title">العربية</div><div class="s-sub">Arabic — Middle East</div></div>
+        <div id="lang-check-arabic" style="display:none;color:var(--g4);font-size:18px;"><i class="fas fa-check-circle"></i></div>
+      </div>
+      <div class="s-row" onclick="setLanguage('pashto','پښتو','ps')" style="border-radius:12px;margin-bottom:8px;background:var(--bg2);">
+        <div style="font-size:28px;">🇦🇫</div>
+        <div style="flex:1;"><div class="s-title">پښتو</div><div class="s-sub">Pashto — Afghanistan/Pakistan</div></div>
+        <div id="lang-check-pashto" style="display:none;color:var(--g4);font-size:18px;"><i class="fas fa-check-circle"></i></div>
+      </div>
+      <div class="s-row" onclick="setLanguage('sindhi','سنڌي','sd')" style="border-radius:12px;margin-bottom:8px;background:var(--bg2);">
+        <div style="font-size:28px;">🌊</div>
+        <div style="flex:1;"><div class="s-title">سنڌي</div><div class="s-sub">Sindhi — Pakistan</div></div>
+        <div id="lang-check-sindhi" style="display:none;color:var(--g4);font-size:18px;"><i class="fas fa-check-circle"></i></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -13015,40 +13060,35 @@ console.log('🌍 Hamara v11 COMPLETE — WhatsApp + TikTok All Features Ready!'
 // 🔐 THE ONE TRUE LOGOUT — Works with Firebase Compat SDK
 // ============================================================
 function doLogout() {
-  var sure = window.confirm('Logout karna chahte hain?');
-  if (!sure) return;
-  
-  // Step 1: Clear everything immediately
-  try { localStorage.clear(); } catch(e) {}
-  try { sessionStorage.clear(); } catch(e) {}
-  
-  // Step 2: Reset app state
-  try { if (typeof APP !== 'undefined') { APP.user = null; APP.openChatId = null; } } catch(e) {}
-  try { currentUser = null; } catch(e) {}
-  
-  // Step 3: Firebase signout (background)
-  try { firebase.auth().signOut().catch(function(){}); } catch(e) {}
-  try { if (window._fbAuth) window._fbAuth.signOut().catch(function(){}); } catch(e) {}
-  try { if (typeof auth !== 'undefined' && auth) auth.signOut().catch(function(){}); } catch(e) {}
-  
-  // Step 4: Go to landing page
-  showToast('✅ Logout ho gaye! 👋');
-  
-  setTimeout(function() {
-    // Try goScreen first
-    try {
-      if (typeof goScreen === 'function') {
-        goScreen('landing');
-        return;
-      }
-    } catch(e) {}
-    
-    // If goScreen fails, reload page
-    window.location.reload();
-  }, 500);
+  if (!window.confirm('Logout karna chahte hain?')) return;
+  showToast('👋 Logout ho raha hai...');
+  // Clear all storage
+  try { localStorage.clear(); } catch(e){}
+  try { sessionStorage.clear(); } catch(e){}
+  // Firebase signout
+  try { firebase.auth().signOut(); } catch(e){}
+  // Hard redirect to homepage after 800ms
+  setTimeout(function(){
+    window.location.href = window.location.href.split('?')[0].split('#')[0];
+  }, 800);
 }
-
 window.doLogout = doLogout;
+
+window.logoutAllAccounts = function(){
+  if (!window.confirm('Sab accounts se logout karna chahte hain?')) return;
+  try { localStorage.clear(); sessionStorage.clear(); } catch(e){}
+  try { firebase.auth().signOut(); } catch(e){}
+  showToast('✅ Sab accounts se logout! 👋');
+  setTimeout(function(){ window.location.href = window.location.href.split('?')[0]; }, 800);
+};
+
+window.addNewAccount = function(){
+  if (!window.confirm('Naya account ke liye logout hoga. Jari rakhein?')) return;
+  try { localStorage.removeItem('hm_user_v7'); } catch(e){}
+  try { firebase.auth().signOut(); } catch(e){}
+  showToast('📱 Naya number darj karein...');
+  setTimeout(function(){ window.location.href = window.location.href.split('?')[0]; }, 800);
+};
 
 window.logoutAllAccounts = function() {
   var sure = window.confirm('Sab accounts se logout karna chahte hain?');
@@ -13095,6 +13135,119 @@ window.addNewAccount = function() {
     showToast('📱 Naya account: Number darj karein');
   }, 500);
 };
+
+
+// ============================================================
+// 🌍 LANGUAGE SYSTEM — Working
+// ============================================================
+var LANG_STRINGS = {
+  english: {
+    chats: 'Chats', groups: 'Groups', studio: 'Studio', chaupal: 'Chaupal',
+    profile: 'Profile', settings: 'Settings', search: 'Search chats...',
+    message: 'Message likhein...', send: 'Send', logout: 'Logout',
+    online: 'Online', typing: 'typing...'
+  },
+  urdu: {
+    chats: 'چیٹس', groups: 'گروپس', studio: 'اسٹوڈیو', chaupal: 'چوپال',
+    profile: 'پروفائل', settings: 'ترتیبات', search: 'چیٹس تلاش کریں...',
+    message: 'پیغام لکھیں...', send: 'بھیجیں', logout: 'لاگ آؤٹ',
+    online: 'آن لائن', typing: 'ٹائپ کر رہا ہے...'
+  },
+  hindi: {
+    chats: 'चैट्स', groups: 'ग्रुप्स', studio: 'स्टूडियो', chaupal: 'चौपाल',
+    profile: 'प्रोफ़ाइल', settings: 'सेटिंग्स', search: 'चैट खोजें...',
+    message: 'संदेश लिखें...', send: 'भेजें', logout: 'लॉग आउट',
+    online: 'ऑनलाइन', typing: 'टाइप कर रहा है...'
+  },
+  arabic: {
+    chats: 'المحادثات', groups: 'المجموعات', studio: 'الاستوديو', chaupal: 'الساحة',
+    profile: 'الملف', settings: 'الإعدادات', search: 'بحث...',
+    message: 'اكتب رسالة...', send: 'إرسال', logout: 'تسجيل خروج',
+    online: 'متصل', typing: 'يكتب...'
+  },
+  pashto: {
+    chats: 'خبرې', groups: 'ګروپونه', studio: 'سټوډیو', chaupal: 'چوپال',
+    profile: 'پروفایل', settings: 'ترتیبات', search: 'چت ولټوئ...',
+    message: 'پیغام ولیکئ...', send: 'واستوئ', logout: 'وتل',
+    online: 'آنلاین', typing: 'ټایپ کوي...'
+  },
+  sindhi: {
+    chats: 'ڳالهيون', groups: 'گروپ', studio: 'اسٽوڊيو', chaupal: 'چوپال',
+    profile: 'پروفائيل', settings: 'سيٽنگون', search: 'ڳالهيون ڳوليو...',
+    message: 'پيغام لکو...', send: 'موڪليو', logout: 'لاگ آئوٽ',
+    online: 'آنلائن', typing: 'ٽائيپ ڪري رهيو آهي...'
+  }
+};
+
+var currentLang = localStorage.getItem('hamara_lang') || 'english';
+
+function setLanguage(lang, displayName, code) {
+  currentLang = lang;
+  localStorage.setItem('hamara_lang', lang);
+  localStorage.setItem('hamara_lang_code', code);
+  
+  // Update checkmarks
+  ['english','urdu','hindi','arabic','pashto','sindhi'].forEach(function(l) {
+    var el = document.getElementById('lang-check-' + l);
+    if (el) el.style.display = l === lang ? 'block' : 'none';
+  });
+  
+  // Update settings subtitle
+  var langSubEl = document.getElementById('lang-sub-s');
+  if (langSubEl) langSubEl.textContent = displayName + ' ' + (code === 'ur' ? '🇵🇰' : code === 'en' ? '🌍' : code === 'hi' ? '🇮🇳' : code === 'ar' ? '🇸🇦' : '🌐');
+  
+  // RTL support for Arabic/Urdu
+  if (code === 'ar' || code === 'ur' || code === 'ps' || code === 'sd') {
+    document.body.style.direction = 'rtl';
+  } else {
+    document.body.style.direction = 'ltr';
+  }
+  
+  // Apply translations
+  var strings = LANG_STRINGS[lang] || LANG_STRINGS['english'];
+  
+  // Update nav labels
+  var navMap = {
+    'nav-chats': strings.chats,
+    'nav-groups': strings.groups, 
+    'nav-studio': strings.studio,
+    'nav-chaupal': strings.chaupal,
+    'nav-profile': strings.profile,
+    'nav-settings': strings.settings
+  };
+  Object.keys(navMap).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      var span = el.querySelector('span:not(.bnav-badge)');
+      if (span) span.textContent = navMap[id];
+    }
+  });
+  
+  // Update search placeholder
+  var searchEl = document.getElementById('chat-search');
+  if (searchEl) searchEl.placeholder = strings.search;
+  
+  // Update message placeholder
+  var msgEl = document.getElementById('msg-input');
+  if (msgEl) msgEl.placeholder = strings.message;
+  
+  showToast('✅ Language changed to ' + displayName + '!');
+  
+  // Close panel
+  setTimeout(function() { closeFeat('s-language'); }, 800);
+}
+
+// Apply saved language on load
+document.addEventListener('DOMContentLoaded', function() {
+  var saved = localStorage.getItem('hamara_lang');
+  var savedName = {english:'English',urdu:'اردو',hindi:'हिंदी',arabic:'العربية',pashto:'پښتو',sindhi:'سنڌي'};
+  var savedCode = {english:'en',urdu:'ur',hindi:'hi',arabic:'ar',pashto:'ps',sindhi:'sd'};
+  if (saved && LANG_STRINGS[saved]) {
+    setLanguage(saved, savedName[saved] || saved, savedCode[saved] || 'en');
+  }
+});
+
+console.log('🌍 Language System Ready!');
 
 </script>
 
