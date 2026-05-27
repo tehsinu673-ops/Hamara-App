@@ -7008,6 +7008,12 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
+
+// Enable Firestore Offline Persistence for unstable Pakistani mobile networks
+db.enablePersistence().catch(function(err) {
+  console.log("Offline mode persistence error:", err.code);
+});
+
 const storage = firebase.storage();
 
 // Current user data
@@ -7863,10 +7869,17 @@ window.closeLiveScreen = async function() {
 
 // ─── Override openLiveScreen for viewers ───
 const _origOpenLiveScreenAgora = window.openLiveScreen;
-window.openLiveScreen = function(hostName, hostAv, hostColor, viewers, title, channelName) {
+window.openLiveScreen = async function(hostName, hostAv, hostColor, viewers, title, channelName) {
   _origOpenLiveScreenAgora(hostName, hostAv, hostColor, viewers, title);
   if (!isHostingLive && channelName) {
-    agoraJoinLive('hamara_live', '007eJxTYJiVnsvnsaIs5pDy7btOG395b1zUUstf1hztHjvB48CuzwkKDMmG5mapZskGSQYpBiapSRYWySlJZgZGSYbJFikmieZJ6/ezZTUEMjJkPdJiZWSAQBCfmyEjMTexKDE+J7MslYEBAHDgIxo=');
+    try {
+      showLiveToast('🔑 Loading stream video...');
+      const token = await getAgoraToken(channelName, 'audience');
+      agoraJoinLive(channelName, token);
+    } catch(err) {
+      console.error('Error joining stream:', err);
+      showLiveToast('⚠️ Stream video load fail!');
+    }
   }
 };
 
