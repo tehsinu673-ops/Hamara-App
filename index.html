@@ -7150,16 +7150,25 @@ function sendOTP() {
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Bhej raha hoon...';
   btn.disabled = true;
 
-  // Setup reCAPTCHA
-  if (!recaptchaVerifier) {
-    recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-      'size': 'normal',
-      'callback': () => {},
-      'expired-callback': () => {
-        recaptchaVerifier = null;
-      }
-    });
+  // Setup reCAPTCHA cleanly and reset to prevent duplicate render error
+  try {
+    const recapContainer = document.getElementById('recaptcha-container');
+    if (recapContainer) {
+      recapContainer.innerHTML = ''; // Clear previous captcha rendering
+    }
+    recaptchaVerifier = null; // Reset verifier variable
+  } catch(e) {
+    console.warn("reCAPTCHA container clear warning:", e);
   }
+
+  // Initialize fresh reCAPTCHA
+  recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+    'size': 'normal',
+    'callback': () => {},
+    'expired-callback': () => {
+      recaptchaVerifier = null;
+    }
+  });
 
   auth.signInWithPhoneNumber(fullPhone, recaptchaVerifier)
     .then((result) => {
@@ -7176,6 +7185,14 @@ function sendOTP() {
       console.error('OTP Error:', error);
       btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> OTP Bhejo';
       btn.disabled = false;
+      
+      // Clean up reCAPTCHA on failure so next click works
+      try {
+        recaptchaVerifier = null;
+        const recapContainer = document.getElementById('recaptcha-container');
+        if (recapContainer) recapContainer.innerHTML = '';
+      } catch(e) {}
+
       if (error.code === 'auth/too-many-requests') {
         showFbToast('❌ Zyada try kiya! Thodi der baad karo');
       } else {
