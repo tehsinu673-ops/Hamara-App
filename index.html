@@ -1589,7 +1589,7 @@ body{height:100%;font-family:'Outfit',sans-serif;display:flex;justify-content:ce
       <div style="color:#a7f3d0;font-size:13px;margin-top:6px;" id="wallet-coins-display">🪙 42,250 Coins</div>
       <div class="wallet-actions">
         <button class="wallet-act" onclick="openWithdraw()"><i class="fas fa-wallet"></i> Withdraw</button>
-        <button class="wallet-act" onclick="showToast('Coins khareedein 🪙')"><i class="fas fa-coins"></i> Buy Coins</button>
+        <button class="wallet-act" onclick="openCoinBuy()"><i class="fas fa-coins"></i> Buy Coins</button>
         <button class="wallet-act" onclick="showToast('Transaction history 📋')"><i class="fas fa-clock-rotate-left"></i> History</button>
       </div>
     </div>
@@ -4477,6 +4477,21 @@ const AUTO_COMMENTS = [
 
 // ══════════════ INIT ══════════════
 function initLiveModule() {
+  // Sync liveCoins with localStorage wallet coins so balance is identical everywhere!
+  try {
+    const savedCoins = localStorage.getItem('hm_coins');
+    if (savedCoins !== null) {
+      liveCoins = parseInt(savedCoins);
+    } else if (typeof APP !== 'undefined' && APP.walletCoins) {
+      liveCoins = APP.walletCoins;
+    } else {
+      liveCoins = 42250; // Standard default wallet coins
+    }
+  } catch(e) {
+    console.warn("Wallet sync failed, using default coins:", e);
+    liveCoins = 150;
+  }
+
   renderGiftGrid();
   renderCoinPackages();
   renderEmojiPanel();
@@ -4766,7 +4781,34 @@ function selectCoinPkg(i) {
 
 function buyCoinPkg() {
   if(!selectedCoinPkg) return;
+  
+  // 1. Add coins to live stream balance
   liveCoins += selectedCoinPkg.coins;
+  
+  // 2. Add coins to APP wallet balance and synchronize
+  if (typeof APP !== 'undefined') {
+    APP.walletCoins = (APP.walletCoins || 0) + selectedCoinPkg.coins;
+    APP.walletPkr = APP.walletCoins / 5;
+    localStorage.setItem('hm_coins', String(APP.walletCoins));
+    
+    // Update Wallet HTML displays
+    const walletDisplay = document.getElementById('wallet-coins-display');
+    if (walletDisplay) {
+      walletDisplay.textContent = `🪙 ${APP.walletCoins.toLocaleString()} Coins`;
+    }
+    const walletPkrDisplay = document.getElementById('wallet-pkr-display');
+    if (walletPkrDisplay) {
+      walletPkrDisplay.textContent = `PKR ${APP.walletPkr.toLocaleString()}`;
+    }
+  }
+  
+  // 3. Save to Firebase Database under user profile if logged in
+  if (typeof db !== 'undefined' && typeof auth !== 'undefined' && auth.currentUser) {
+    db.collection('users').doc(auth.currentUser.uid).update({
+      coins: liveCoins
+    }).catch(e => console.warn("Firebase coins save failed:", e));
+  }
+
   updateCoinDisplay();
   closeCoinBuy();
   showLiveToast(`🪙 ${selectedCoinPkg.coins.toLocaleString()} Coins mil gaye!`);
@@ -7753,15 +7795,17 @@ function initAgoraClient(mode = 'live') {
 // ─── Host: Start Live Streaming ───
 async function agoraStartHostLive(channelName, token = null) {
   try {
-    initAgoraClient('live');
-    await agoraClient.setClientRole('host');
-    await agoraClient.join(AGORA_APP_ID, channelName, token, null);
-    
-    // Create local audio & video tracks
+    // 1. Force Request Camera and Microphone Permissions immediately!
+    showLiveToast('🎥 Requesting Camera & Mic permissions...');
     [agoraLocalAudioTrack, agoraLocalVideoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks(
       { encoderConfig: 'music_standard' },
       { encoderConfig: { width: 720, height: 1280, frameRate: 30, bitrateMin: 600, bitrateMax: 1500 } }
     );
+    
+    // 2. Once permission is granted, initialize Agora and join
+    initAgoraClient('live');
+    await agoraClient.setClientRole('host');
+    await agoraClient.join(AGORA_APP_ID, channelName, token, null);
 
     // Play local video
     const localDiv = document.getElementById('agoraLocalVideo');
